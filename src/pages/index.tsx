@@ -10,8 +10,6 @@ const IndexPage: NextPageWithLayout = () => {
   const latestBlockQuery = trpc.block.latest.useQuery();
   const valdatorCountQuery = trpc.validator.count.useQuery();
 
-  console.log(latestBlockQuery.data)
-
   return (
     <>
       <Container>
@@ -20,7 +18,7 @@ const IndexPage: NextPageWithLayout = () => {
             <StatsCard title="Latest block" value={latestBlockQuery.data?.height || 0} />
           </Grid>
           <Grid xs={3}>
-            <StatsCard title="Since last block" value={1232132132} />
+            <StatsCard title="Since last block" value={"N/A"} />
           </Grid>
           <Grid xs={3}>
             <StatsCard title="Staked validators" value={valdatorCountQuery.data || 0} />

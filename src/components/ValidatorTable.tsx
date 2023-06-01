@@ -31,18 +31,9 @@ export const ValidatorTable = ({ height, ...cardProps }: ValidatorTableProps) =>
 
   const validatorListQuery = trpc.validator.list.useQuery({ limit: 100, height }); // Should be infinite & paginated
 
-  // address: true,
-  // public_key: true,
-  // staked_tokens: true,
-  // service_url: true,
-  // output_address: true,
-  // paused_height: true,
-  // unstaking_height: true,
-  // height: true,
-
   return (
     <Table
-      aria-label="Example table with dynamic content"
+      aria-label="Validator list"
       css={{
         height: "auto",
         minWidth: "100%",

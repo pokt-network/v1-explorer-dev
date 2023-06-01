@@ -34,29 +34,42 @@ export const validatorRouter = router({
     )
     .query(async ({ input }) => {
 
-      const limit = input.limit ?? 50;
-      const { cursor , height } = input;
+      const { height, cursor } = input;
+
+      const limit = input.limit || 50;
 
       const items = await prisma.validator.findMany({
-        select: defaultValidatorSelect,
-        take: limit + 1,
+        select: {
+          address: true,
+          public_key: true,
+          staked_tokens: true,
+          service_url: true,
+          output_address: true,
+          paused_height: true,
+          unstaking_height: true,
+          height: true,
+        },
         where: {
           height: {
-            lte: height, // This translates to 'height <= [input.height]'
+            lte: height
           },
         },
+        take: limit + 1,
         cursor: cursor
-          ? { address_height: { height, address: cursor }}
+          ? {
+              address_height: { address: cursor, height }
+            }
           : undefined,
         orderBy: [
           {
-            address: 'asc', // This will make the SELECT DISTINCT ON (address) SQL clause
+            address: 'asc',
           },
           {
-            height: 'desc', // This will make the ORDER BY address, height DESC SQL clause
+            height: 'desc',
           },
         ],
       });
+
       let nextCursor: typeof cursor | undefined = undefined;
       if (items.length > limit) {
         const nextItem = items.pop()!;
@@ -93,24 +106,4 @@ export const validatorRouter = router({
       }
       return validator;
     }),
-//   add: publicProcedure
-//     .input(
-//       z.object({
-//         address: z.string(),
-//         public_key: z.string(),
-//         staked_tokens: z.string(),
-//         service_url: z.string(),
-//         output_address: z.string(),
-//         paused_height: z.bigint().optional(),
-//         unstaking_height: z.bigint().optional(),
-//         height: z.bigint().optional(),
-//       }),
-//     )
-//     .mutation(async ({ input }) => {
-//       const validator = await prisma.validator.create({
-//         data: input,
-//         select: defaultValidatorSelect,
-//       });
-//       return validator;
-//     }),
 });

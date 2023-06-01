@@ -3,6 +3,7 @@
  * Note: requires `ssr: true` or a `getInitialProps` in `_app.tsx`
  * @link https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
  */
+import { z } from 'zod';
 import type * as config from '../../next.config';
 import getConfig from 'next/config';
 
@@ -15,3 +16,5 @@ const nextConfig = getConfig();
 
 export const publicRuntimeConfig =
   nextConfig.publicRuntimeConfig as PublicRuntimeConfig;
+
+export const allowedCommands = ['BlockRequest', 'MetadataRequest', 'PrintNodeState', 'ResetToGenesis', 'ShowLatestBlockInStore', 'TogglePacemakerMode', 'TriggerNextView'];

@@ -25,6 +25,7 @@ module.exports = getConfig({
    */
   publicRuntimeConfig: {
     NODE_ENV: env.NODE_ENV,
+    // ALLOWED_COMMANDS: env.ALLOWED_COMMANDS
   },
   /** We run eslint as a separate task in CI */
   eslint: { ignoreDuringBuilds: !!process.env.CI },

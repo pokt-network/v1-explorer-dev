@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Card, Text, CardProps } from "@nextui-org/react";
 
 
-type StatsCardProps = { title: ReactNode, value: number | BigInt } & Partial<CardProps>;
+type StatsCardProps = { title: ReactNode, value: number | BigInt | string } & Partial<CardProps>;
 
 export const StatsCard = ({ title, value, ...cardProps }: StatsCardProps) => {
   return (
