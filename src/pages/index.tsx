@@ -11,8 +11,9 @@ const IndexPage: NextPageWithLayout = ({ height }) => {
   const latestBlockQuery = trpc.rpc.queryBlock.useQuery({ height }, { refetchInterval: 1000 });
   const valdatorCountQuery = trpc.rpc.listValidators.useQuery({ height, page: 1 });
   // TODO: figure out why `block_header` is returned from rpc, but not just `block`.
+  // @ts-ignore
   const latestBlockTs = latestBlockQuery.data?.block_header?.timestamp ? parsePocketBlockDate(latestBlockQuery.data?.block_header?.timestamp) : null
-
+  // @ts-ignore
   console.log(latestBlockQuery.data?.block_header?.timestamp + ' -> ' + latestBlockTs?.toISOString())
 
   return (
