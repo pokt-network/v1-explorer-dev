@@ -76,7 +76,7 @@ jobs:
           DOCKER_METADATA_PR_HEAD_SHA: "true"
         with:
           images: |
-            ghcr.io/pokt-network/v1-explorer
+            ghcr.io/pokt-network/v1-explorer-dev
           tags: |
             type=schedule
             type=semver,pattern={{version}}

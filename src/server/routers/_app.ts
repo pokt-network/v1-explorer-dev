@@ -3,7 +3,6 @@
  */
 import { publicProcedure, router } from '../trpc';
 import { validatorRouter } from './validator';
-import { blockRouter } from './block';
 import { chainCommandsRouter } from './chain-commands';
 import { rpcClientRouter } from './rpc-client-router';
 
@@ -14,7 +13,6 @@ export const appRouter = router({
   }),
 
   validator: validatorRouter,
-  block: blockRouter,
   chainCommands: chainCommandsRouter,
   rpc: rpcClientRouter,
 });
