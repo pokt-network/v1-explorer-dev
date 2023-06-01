@@ -5,8 +5,7 @@
 import type { ActorTypesEnum } from './ActorTypesEnum';
 
 export type MessageUnstake = {
-    actor_type: ActorTypesEnum;
-    address: string;
-    signer: string;
+  actor_type: ActorTypesEnum;
+  address: string;
+  signer: string;
 };
-

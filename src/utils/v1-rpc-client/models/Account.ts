@@ -5,7 +5,6 @@
 import type { Coin } from './Coin';
 
 export type Account = {
-    address: string;
-    coins: Array<Coin>;
+  address: string;
+  coins: Array<Coin>;
 };
-

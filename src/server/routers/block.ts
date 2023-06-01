@@ -28,7 +28,6 @@ export const blockRouter = router({
       }),
     )
     .query(async ({ input }) => {
-
       const limit = input.limit ?? 50;
       const { cursor } = input;
 
@@ -76,20 +75,19 @@ export const blockRouter = router({
       }
       return block;
     }),
-  latest: publicProcedure
-    .query(async () => {
-      const block = await prisma.block.findFirst({
-        select: defaultBlockSelect,
-        orderBy: {
-          height: 'desc',
-        },
+  latest: publicProcedure.query(async () => {
+    const block = await prisma.block.findFirst({
+      select: defaultBlockSelect,
+      orderBy: {
+        height: 'desc',
+      },
+    });
+    if (!block) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: `No block found`,
       });
-      if (!block) {
-        throw new TRPCError({
-          code: 'NOT_FOUND',
-          message: `No block found`,
-        });
-      }
-      return block;
-    }),
+    }
+    return block;
+  }),
 });

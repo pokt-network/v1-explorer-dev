@@ -3,6 +3,5 @@
 /* eslint-disable */
 
 export type QueryHash = {
-    hash: string;
+  hash: string;
 };
-

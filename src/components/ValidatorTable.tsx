@@ -1,5 +1,5 @@
 import { trpc } from '../utils/trpc';
-import { Card, CardProps, Table } from "@nextui-org/react";
+import { Card, CardProps, Table, Text } from '@nextui-org/react';
 
 declare global {
   interface BigInt {
@@ -13,47 +13,60 @@ BigInt.prototype.toJSON = function (): string {
 
 type ValidatorTableProps = { height: bigint };
 
-export const ValidatorTable = ({ height, ...cardProps }: ValidatorTableProps) => {
+export const ValidatorTable = ({
+  height,
+  ...cardProps
+}: ValidatorTableProps) => {
   const columns = [
     {
-      key: "address",
-      label: "Address",
+      key: 'address',
+      label: 'Address',
     },
     {
-      key: "staked_tokens",
-      label: "Staked Tokens",
+      key: 'staked_tokens',
+      label: 'Staked Tokens',
     },
     {
-      key: "service_url",
-      label: "Service URL",
+      key: 'service_url',
+      label: 'Service URL',
     },
   ];
 
-  const validatorListQuery = trpc.rpc.listValidators.useQuery({ height: BigInt(height), page: 1 }); // Should be infiniteQuery & paginated
+  const validatorListQuery = trpc.rpc.listValidators.useQuery({
+    height: BigInt(height),
+    page: 1,
+  }); // Should be infiniteQuery & paginated
 
   return (
-    <Table
-      aria-label="Validator list"
-      css={{
-        height: "auto",
-        minWidth: "100%",
-      }}
-    >
-      <Table.Header columns={columns}>
-        {(column) => (
-          <Table.Column key={column.key}>{column.label}</Table.Column>
-        )}
-      </Table.Header>
-      <Table.Body items={validatorListQuery.data?.validators || []}>
-        {(item) => (
-          <Table.Row key={item.address + height}>
-            <Table.Cell>{item.address}</Table.Cell>
-            <Table.Cell>{item.staked_amount}</Table.Cell>
-            <Table.Cell>{item.service_url}</Table.Cell>
-          </Table.Row>
-        )}
-      </Table.Body>
-    </Table>
-
+    <Card {...cardProps}>
+      <Card.Header>
+        <Text b>Staked actors</Text>
+      </Card.Header>
+      <Card.Body>
+        <Table
+          aria-label="Validator list"
+          css={{
+            height: 'auto',
+            minWidth: '100%',
+          }}
+          shadow={false}
+        >
+          <Table.Header columns={columns}>
+            {(column) => (
+              <Table.Column key={column.key}>{column.label}</Table.Column>
+            )}
+          </Table.Header>
+          <Table.Body items={validatorListQuery.data?.validators || []}>
+            {(item) => (
+              <Table.Row key={item.address + height}>
+                <Table.Cell>{item.address}</Table.Cell>
+                <Table.Cell>{item.staked_amount}</Table.Cell>
+                <Table.Cell>{item.service_url}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table>
+      </Card.Body>
+    </Card>
   );
 };

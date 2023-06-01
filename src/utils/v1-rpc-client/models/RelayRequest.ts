@@ -6,7 +6,6 @@ import type { Payload } from './Payload';
 import type { RelayRequestMeta } from './RelayRequestMeta';
 
 export type RelayRequest = {
-    payload: Payload;
-    meta: RelayRequestMeta;
+  payload: Payload;
+  meta: RelayRequestMeta;
 };
-

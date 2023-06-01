@@ -3,6 +3,5 @@
 /* eslint-disable */
 
 export type QueryHeight = {
-    height: number;
+  height: number;
 };
-

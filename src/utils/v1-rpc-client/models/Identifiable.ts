@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type Identifiable = {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 };
-

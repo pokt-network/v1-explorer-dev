@@ -6,7 +6,6 @@ import type { BlockHeader } from './BlockHeader';
 import type { IndexedTransaction } from './IndexedTransaction';
 
 export type Block = {
-    block_header: BlockHeader;
-    transactions: Array<IndexedTransaction>;
+  block_header: BlockHeader;
+  transactions: Array<IndexedTransaction>;
 };
-

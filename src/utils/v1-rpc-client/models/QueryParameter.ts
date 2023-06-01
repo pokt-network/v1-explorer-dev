@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type QueryParameter = {
-    param_name: string;
-    height: number;
+  param_name: string;
+  height: number;
 };
-

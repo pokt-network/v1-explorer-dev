@@ -15,9 +15,7 @@ env.NODE_ENV === 'development'
   ? config.loadFromDefault()
   : config.loadFromCluster();
 
-export const kubeConfig: k8s.KubeConfig =
-  kubeConfigGlobal.kubeConfig ||
-  config;
+export const kubeConfig: k8s.KubeConfig = kubeConfigGlobal.kubeConfig || config;
 
 if (env.NODE_ENV !== 'production') {
   kubeConfigGlobal.kubeConfig = kubeConfig;

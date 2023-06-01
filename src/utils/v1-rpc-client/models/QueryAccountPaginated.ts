@@ -3,9 +3,8 @@
 /* eslint-disable */
 
 export type QueryAccountPaginated = {
-    address: string;
-    page: number;
-    per_page: number;
-    sort?: string;
+  address: string;
+  page: number;
+  per_page: number;
+  sort?: string;
 };
-

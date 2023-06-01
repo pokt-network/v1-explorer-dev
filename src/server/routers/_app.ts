@@ -9,13 +9,14 @@ import { rpcClientRouter } from './rpc-client-router';
 
 export const appRouter = router({
   healthcheck: publicProcedure.query(() => 'yay!'),
-  settings: publicProcedure.query(() => { return { networkName: process.env.NETWORK_NAME } }),
+  settings: publicProcedure.query(() => {
+    return { networkName: process.env.NETWORK_NAME };
+  }),
 
   validator: validatorRouter,
   block: blockRouter,
   chainCommands: chainCommandsRouter,
-  rpc: rpcClientRouter
+  rpc: rpcClientRouter,
 });
-
 
 export type AppRouter = typeof appRouter;

@@ -3,6 +3,5 @@
 /* eslint-disable */
 
 export type QuerySupportedChainsResponse = {
-    supported_chains: Array<string>;
+  supported_chains: Array<string>;
 };
-

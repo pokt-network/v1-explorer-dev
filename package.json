@@ -1,6 +1,6 @@
 {
-  "name": "@examples/trpc-next-prisma-starter",
-  "version": "10.27.3",
+  "name": "pokt-v1-explorer",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "generate": "prisma generate",

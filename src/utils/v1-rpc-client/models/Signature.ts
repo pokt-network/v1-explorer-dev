@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type Signature = {
-    public_key: string;
-    signature: string;
+  public_key: string;
+  signature: string;
 };
-

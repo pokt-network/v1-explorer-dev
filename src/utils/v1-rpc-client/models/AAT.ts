@@ -3,9 +3,8 @@
 /* eslint-disable */
 
 export type AAT = {
-    version: string;
-    app_pub_key: string;
-    client_pub_key: string;
-    app_signature: string;
+  version: string;
+  app_pub_key: string;
+  client_pub_key: string;
+  app_signature: string;
 };
-

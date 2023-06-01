@@ -5,6 +5,5 @@
 import type { PartialSignature } from './PartialSignature';
 
 export type ThresholdSignature = {
-    signatures: Array<PartialSignature>;
+  signatures: Array<PartialSignature>;
 };
-

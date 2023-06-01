@@ -9,9 +9,9 @@ const { z } = require('zod');
 /*eslint sort-keys: "error"*/
 const envSchema = z.object({
   DATABASE_URL: z.string().url(),
-  NODE_ENV: z.enum(['development', 'test', 'production']),
-  NETWORK_NAME: z.string(),
   KUBERNETES_NAMESPACE: z.string(),
+  NETWORK_NAME: z.string(),
+  NODE_ENV: z.enum(['development', 'test', 'production']),
   POCKET_RPC_ENDPOINT: z.string().url(),
 });
 

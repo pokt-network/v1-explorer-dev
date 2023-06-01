@@ -5,7 +5,6 @@
 import type { Actor } from './Actor';
 
 export type P2PStakedActorsResponse = {
-    actors: Array<Actor>;
-    height: number;
+  actors: Array<Actor>;
+  height: number;
 };
-

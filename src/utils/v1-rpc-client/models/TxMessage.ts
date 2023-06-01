@@ -12,9 +12,14 @@ import type { MessageUnstake } from './MessageUnstake';
 import type { Signature } from './Signature';
 
 export type TxMessage = {
-    fee: Fee;
-    message: (MessageSend | MessageStake | MessageEditStake | MessageUnstake | MessageUnpause | MessageChangeParameter);
-    nonce: string;
-    signature: Signature;
+  fee: Fee;
+  message:
+    | MessageSend
+    | MessageStake
+    | MessageEditStake
+    | MessageUnstake
+    | MessageUnpause
+    | MessageChangeParameter;
+  nonce: string;
+  signature: Signature;
 };
-

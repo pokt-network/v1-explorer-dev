@@ -25,33 +25,34 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 7.26.0
+      # - uses: pnpm/action-setup@v2.2.4
+      #   with:
+      #     version: 7.26.0
 
-      - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'pnpm' # You can active this cache when your repo has a lockfile
+      # - name: Use Node ${{ matrix.node }}
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: ${{ matrix.node }}
+      #     cache: 'pnpm' # You can active this cache when your repo has a lockfile
 
-      - name: Install deps (with cache)
-        run: pnpm install
+      # - name: Install deps (with cache)
+      #   run: pnpm install
 
       # - name: Install playwright
       #   run: pnpm playwright install chromium
 
-      - name: Next.js cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-${{ runner.node }}-${{ hashFiles('**/pnpm-lock.yaml') }}-nextjs
+      # - name: Next.js cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ${{ github.workspace }}/.next/cache
+      #     key: ${{ runner.os }}-${{ runner.node }}-${{ hashFiles('**/pnpm-lock.yaml') }}-nextjs
 
-      - name: Setup Prisma
-        run: pnpm prebuild
+      # - name: Setup Prisma
+      #   run: pnpm prebuild
 
-      - name: Build and test
-        run: pnpm test-start && pnpm test-dev
+      # - name: Build
+      #   run: pnpm test-start && pnpm test-dev
+
 
       # Take care of tests when this project is out of PoC stage :)
       # - name: Build and test
@@ -64,3 +65,44 @@ jobs:
       #     name: test results
       #     path: |
       #       playwright/test-results
+
+      - name: Docker Setup Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Docker Metadata action
+        id: meta
+        uses: docker/metadata-action@v4
+        env:
+          DOCKER_METADATA_PR_HEAD_SHA: "true"
+        with:
+          images: |
+            ghcr.io/pokt-network/v1-explorer
+          tags: |
+            type=schedule
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha
+            type=sha,format=long
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64
+          file: Dockerfile
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+

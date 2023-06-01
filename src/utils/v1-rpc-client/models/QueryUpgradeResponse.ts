@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type QueryUpgradeResponse = {
-    height: number;
-    version: string;
+  height: number;
+  version: string;
 };
-

@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type Header = {
-    name: string;
-    value: string;
+  name: string;
+  value: string;
 };
-

@@ -5,9 +5,8 @@
 import type { TxMessage } from './TxMessage';
 
 export type Transaction = {
-    hash: string;
-    height: number;
-    index: number;
-    txMsg: TxMessage;
+  hash: string;
+  height: number;
+  index: number;
+  txMsg: TxMessage;
 };
-

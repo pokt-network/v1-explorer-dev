@@ -5,9 +5,8 @@
 import type { Headers } from './Headers';
 
 export type Payload = {
-    data: string;
-    method: string;
-    path: string;
-    headers: Headers;
+  data: string;
+  method: string;
+  path: string;
+  headers: Headers;
 };
-

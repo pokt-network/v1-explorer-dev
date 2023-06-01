@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type PartialSignature = {
-    signature: string;
-    address: string;
+  signature: string;
+  address: string;
 };
-

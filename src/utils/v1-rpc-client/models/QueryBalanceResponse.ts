@@ -3,6 +3,5 @@
 /* eslint-disable */
 
 export type QueryBalanceResponse = {
-    balance: number;
+  balance: number;
 };
-

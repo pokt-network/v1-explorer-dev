@@ -3,8 +3,7 @@
 /* eslint-disable */
 
 export type ConsensusState = {
-    height: number;
-    round: number;
-    step: number;
+  height: number;
+  round: number;
+  step: number;
 };
-

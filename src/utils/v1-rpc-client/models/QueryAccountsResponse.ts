@@ -5,8 +5,7 @@
 import type { Account } from './Account';
 
 export type QueryAccountsResponse = {
-    result: Array<Account>;
-    page: number;
-    total_pages: number;
+  result: Array<Account>;
+  page: number;
+  total_pages: number;
 };
-

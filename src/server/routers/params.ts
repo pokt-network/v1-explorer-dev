@@ -28,7 +28,6 @@ export const paramsRouter = router({
       }),
     )
     .query(async ({ input }) => {
-
       const limit = input.limit ?? 50;
       const { cursor } = input;
 
@@ -40,7 +39,7 @@ export const paramsRouter = router({
         //   ? {
         //       name: cursor,
         //     }
-          // : undefined,
+        // : undefined,
         orderBy: {
           height: 'desc',
         },

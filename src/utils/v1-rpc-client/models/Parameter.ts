@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type Parameter = {
-    parameter_name: string;
-    parameter_value: string;
+  parameter_name: string;
+  parameter_value: string;
 };
-

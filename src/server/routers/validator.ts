@@ -33,7 +33,6 @@ export const validatorRouter = router({
       }),
     )
     .query(async ({ input }) => {
-
       const { height, cursor } = input;
 
       const limit = input.limit || 50;
@@ -51,13 +50,13 @@ export const validatorRouter = router({
         },
         where: {
           height: {
-            lte: height
+            lte: height,
           },
         },
         take: limit + 1,
         cursor: cursor
           ? {
-              address_height: { address: cursor, height }
+              address_height: { address: cursor, height },
             }
           : undefined,
         orderBy: [
@@ -82,8 +81,8 @@ export const validatorRouter = router({
       };
     }),
   count: publicProcedure.query(async () => {
-      const count = await prisma.validator.count();
-      return count;
+    const count = await prisma.validator.count();
+    return count;
   }),
   byAddress: publicProcedure
     .input(

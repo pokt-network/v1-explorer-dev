@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type RelayResponse = {
-    payload: string;
-    servicer_signature: string;
+  payload: string;
+  servicer_signature: string;
 };
-

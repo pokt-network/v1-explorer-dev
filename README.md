@@ -5,20 +5,21 @@ This is a utility application designed to aid developers in interacting with bot
 
 ## Quick start
 
-Install dependencies:
+**Install dependencies:** This application uses `pnpm` for managing dependencies. If you don't have `pnpm`, install it first by running `npm install -g pnpm`. Then run the following command to install the application's dependencies:
+
 
 ```bash
 pnpm install
 ```
 
-Configure your environment variables:
+**Configure your environment variables**: Make a copy of the `.env.example` file and rename it to `.env`. Then, open the `.env` file and update the environment variables as needed.
 
 ```bash
 cp .env.example .env
 edit .env
 ```
 
-Start the server:
+**Start the server**: Once you've set up your environment variables, you can start the server by running:
 ```bash
 pnpm dx:next
 ```
@@ -29,9 +30,8 @@ The OpenAPI client is used to generate a client SDK from an OpenAPI Specificatio
 Here's how to generate or regenerate the OpenAPI client:
 
 ```bash
-# Ensure you're in your project directory
-cd /path/to/your/project
+export POCKET_DIR=$HOME/pocket/pocket
 
 # Run the openapi generator script
-./node_modules/.bin/openapi --input ~/pocket/pocket/rpc/v1/openapi.yaml --output ./src/utils/v1-rpc-client --name v1RPC
+./node_modules/.bin/openapi --input $POCKET_DIR/rpc/v1/openapi.yaml --output ./src/utils/v1-rpc-client --name v1RPC
 ```

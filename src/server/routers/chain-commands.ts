@@ -8,16 +8,17 @@ import { allowedCommands } from '../../utils/publicRuntimeConfig';
 
 const namespace = process.env.KUBERNETES_NAMESPACE || 'default';
 const k8sApi = kubeConfig.makeApiClient(k8s.CoreV1Api);
-const listFn = (selector: string) => k8sApi.listNamespacedPod(
-  namespace,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  selector,
-);
+const listFn = (selector: string) =>
+  k8sApi.listNamespacedPod(
+    namespace,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    selector,
+  );
 const debugCliPodSelector = 'app=v1-cli-client';
-const debugCliPodContainerName = 'pocket'
+const debugCliPodContainerName = 'pocket';
 
 export const chainCommandsRouter = router({
   executeCommand: publicProcedure
@@ -48,22 +49,32 @@ export const chainCommandsRouter = router({
 
       // const command = "/bin/bash -c 'ls -la'";
       // const command = '/usr/local/bin/p1 debug ' + commandName;
-      const command = ['p1', 'debug', commandName]
+      const command = ['p1', 'debug', commandName];
 
       const exec = new k8s.Exec(kubeConfig);
 
       const stdoutStream = new stream.PassThrough();
       const stderrStream = new stream.PassThrough();
 
-      let stdout = "";
-      let stderr = "";
+      let stdout = '';
+      let stderr = '';
 
-      stdoutStream.on('data', (chunk) => { stdout += chunk.toString(); });
-      stderrStream.on('data', (chunk) => { stderr += chunk.toString(); });
+      stdoutStream.on('data', (chunk) => {
+        stdout += chunk.toString();
+      });
+      stderrStream.on('data', (chunk) => {
+        stderr += chunk.toString();
+      });
 
       const result = await new Promise<k8s.V1Status>((resolve, reject) => {
-        exec.exec(namespace, podName, debugCliPodContainerName, command,
-          stdoutStream, stderrStream, process.stdin as stream.Readable,
+        exec.exec(
+          namespace,
+          podName,
+          debugCliPodContainerName,
+          command,
+          stdoutStream,
+          stderrStream,
+          process.stdin as stream.Readable,
           true /* tty */,
           (status: k8s.V1Status) => {
             // tslint:disable-next-line:no-console
@@ -71,7 +82,8 @@ export const chainCommandsRouter = router({
             // tslint:disable-next-line:no-console
             console.log(JSON.stringify(status, null, 2));
             resolve(status);
-          });
+          },
+        );
       });
 
       return { result, stdout, stderr };

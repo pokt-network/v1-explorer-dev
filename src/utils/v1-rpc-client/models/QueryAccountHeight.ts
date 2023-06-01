@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type QueryAccountHeight = {
-    height: number;
-    address: string;
+  height: number;
+  address: string;
 };
-

@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 export type Coin = {
-    amount: string;
-    denom: string;
+  amount: string;
+  denom: string;
 };
-
