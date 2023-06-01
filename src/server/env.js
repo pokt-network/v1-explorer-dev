@@ -8,6 +8,7 @@ const { z } = require('zod');
 
 /*eslint sort-keys: "error"*/
 const envSchema = z.object({
+  CLI_CLIENT_POD_SELECTOR: z.string(),
   DATABASE_URL: z.string().url(),
   KUBERNETES_NAMESPACE: z.string(),
   NETWORK_NAME: z.string(),

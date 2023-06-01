@@ -5,8 +5,9 @@ import { kubeConfig } from '../kubermetes';
 import * as stream from 'stream';
 import * as k8s from '@kubernetes/client-node';
 import { allowedCommands } from '../../utils/publicRuntimeConfig';
+import { env } from '../env';
 
-const namespace = process.env.KUBERNETES_NAMESPACE || 'default';
+const namespace = env.KUBERNETES_NAMESPACE;
 const k8sApi = kubeConfig.makeApiClient(k8s.CoreV1Api);
 const listFn = (selector: string) =>
   k8sApi.listNamespacedPod(
@@ -17,7 +18,7 @@ const listFn = (selector: string) =>
     undefined,
     selector,
   );
-const debugCliPodSelector = 'app=v1-cli-client';
+const debugCliPodSelector = env.CLI_CLIENT_POD_SELECTOR;
 const debugCliPodContainerName = 'pocket';
 
 export const chainCommandsRouter = router({
