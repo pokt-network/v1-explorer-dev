@@ -11,6 +11,8 @@ const envSchema = z.object({
   DATABASE_URL: z.string().url(),
   NODE_ENV: z.enum(['development', 'test', 'production']),
   NETWORK_NAME: z.string(),
+  KUBERNETES_NAMESPACE: z.string(),
+  POCKET_RPC_ENDPOINT: z.string().url(),
 });
 
 const env = envSchema.safeParse(process.env);

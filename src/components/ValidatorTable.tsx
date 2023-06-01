@@ -29,7 +29,7 @@ export const ValidatorTable = ({ height, ...cardProps }: ValidatorTableProps) =>
     },
   ];
 
-  const validatorListQuery = trpc.validator.list.useQuery({ limit: 100, height }); // Should be infinite & paginated
+  const validatorListQuery = trpc.rpc.listValidators.useQuery({ height: BigInt(height), page: 1 }); // Should be infiniteQuery & paginated
 
   return (
     <Table
@@ -44,11 +44,11 @@ export const ValidatorTable = ({ height, ...cardProps }: ValidatorTableProps) =>
           <Table.Column key={column.key}>{column.label}</Table.Column>
         )}
       </Table.Header>
-      <Table.Body items={validatorListQuery.data?.items || []}>
+      <Table.Body items={validatorListQuery.data?.validators || []}>
         {(item) => (
-          <Table.Row key={item.address + item.height}>
+          <Table.Row key={item.address + height}>
             <Table.Cell>{item.address}</Table.Cell>
-            <Table.Cell>{item.staked_tokens}</Table.Cell>
+            <Table.Cell>{item.staked_amount}</Table.Cell>
             <Table.Cell>{item.service_url}</Table.Cell>
           </Table.Row>
         )}

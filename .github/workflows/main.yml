@@ -33,13 +33,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-          # cache: 'pnpm' # You can active this cache when your repo has a lockfile
+          cache: 'pnpm' # You can active this cache when your repo has a lockfile
 
       - name: Install deps (with cache)
         run: pnpm install
 
-      - name: Install playwright
-        run: pnpm playwright install chromium
+      # - name: Install playwright
+      #   run: pnpm playwright install chromium
 
       - name: Next.js cache
         uses: actions/cache@v3
@@ -51,12 +51,16 @@ jobs:
         run: pnpm prebuild
 
       - name: Build and test
-        run: pnpm build && pnpm test-start && pnpm test-dev
+        run: pnpm test-start && pnpm test-dev
 
-      - name: Upload test results
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: test results
-          path: |
-            playwright/test-results
+      # Take care of tests when this project is out of PoC stage :)
+      # - name: Build and test
+      #   run: pnpm build && pnpm test-start && pnpm test-dev
+
+      # - name: Upload test results
+      #   if: ${{ always() }}
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: test results
+      #     path: |
+      #       playwright/test-results

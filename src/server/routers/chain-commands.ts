@@ -6,7 +6,7 @@ import * as stream from 'stream';
 import * as k8s from '@kubernetes/client-node';
 import { allowedCommands } from '../../utils/publicRuntimeConfig';
 
-const namespace = process.env.NETWORK_NAME || 'default';
+const namespace = process.env.KUBERNETES_NAMESPACE || 'default';
 const k8sApi = kubeConfig.makeApiClient(k8s.CoreV1Api);
 const listFn = (selector: string) => k8sApi.listNamespacedPod(
   namespace,

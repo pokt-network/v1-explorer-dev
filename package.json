@@ -44,6 +44,7 @@
     "@trpc/react-query": "^10.27.3",
     "@trpc/server": "^10.27.3",
     "clsx": "^1.1.1",
+    "dayjs": "^1.11.7",
     "next": "^13.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
