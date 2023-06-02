@@ -87,7 +87,14 @@ export const chainCommandsRouter = router({
               },
             )
             .catch((e) => {
-              console.log('Error executing command: ' + JSON.stringify({ namespace, podName, debugCliPodContainerName, command }, null, 2));
+              console.log(
+                'Error executing command: ' +
+                  JSON.stringify(
+                    { namespace, podName, debugCliPodContainerName, command },
+                    null,
+                    2,
+                  ),
+              );
               console.log(JSON.stringify(e, null, 2));
               reject(JSON.stringify({ msg: e.message, body: e.body }));
             });
