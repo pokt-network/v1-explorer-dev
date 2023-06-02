@@ -90,17 +90,28 @@ export const chainCommandsRouter = router({
               console.log(
                 'Error executing command: ' +
                   JSON.stringify(
-                    { namespace, podName, debugCliPodContainerName, command },
+                    {
+                      namespace,
+                      podName,
+                      debugCliPodContainerName,
+                      command,
+                      error: e,
+                    },
                     null,
                     2,
                   ),
               );
-              console.log(JSON.stringify(e, null, 2));
-              reject(JSON.stringify({ msg: e.message, body: e.body }));
+
+              reject(JSON.stringify(e));
             });
         });
+
+        // k8sApi
+        // const r = await k8sApi.connectPostNamespacedPodExec(podName, namespace, command.join(' '), debugCliPodContainerName, true, true, true, true)
+        // console.log(JSON.stringify(r, null, 2))
         return { result, stdout, stderr };
       } catch (e) {
+        console.log(JSON.stringify(e, null, 2));
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
           message: `Error executing command: ${e}`,
