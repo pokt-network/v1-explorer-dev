@@ -86,6 +86,11 @@ export const chainCommandsRouter = router({
               resolve(status);
             },
           );
+        }).catch((e) => {
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: `Error exec: ${e}`,
+          });
         });
         return { result, stdout, stderr };
       } catch (e) {
