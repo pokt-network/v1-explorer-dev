@@ -23,6 +23,7 @@ export const NetworkInfoCard = ({ ...cardProps }: NetworkInfoCardProps) => {
     links.documentation = [
       'https://github.com/pokt-network/protocol-infra/blob/main/README.md',
       'https://www.notion.so/pocketnetwork/How-to-DevNet-ff1598f27efe44c09f34e2aa0051f0dd?pvs=4',
+      'https://www.notion.so/pocketnetwork/V1-networks-7d95c10c930c45c3823c871f21d44fca?pvs=4',
     ];
   }
 

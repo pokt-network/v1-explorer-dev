@@ -10,10 +10,11 @@ const kubeConfigGlobal = global as typeof global & {
 };
 
 const config = new k8s.KubeConfig();
+config.loadFromDefault();
 
-env.NODE_ENV === 'development'
-  ? config.loadFromDefault()
-  : config.loadFromCluster();
+// env.NODE_ENV === 'development'
+//   ? config.loadFromDefault()
+//   : config.loadFromCluster();
 
 export const kubeConfig: k8s.KubeConfig = kubeConfigGlobal.kubeConfig || config;
 
