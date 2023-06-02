@@ -68,7 +68,7 @@ export const chainCommandsRouter = router({
 
       try {
         const result = await new Promise<k8s.V1Status>((resolve, reject) => {
-          exec
+          const ws = exec
             .exec(
               namespace,
               podName,
@@ -102,7 +102,17 @@ export const chainCommandsRouter = router({
                   ),
               );
 
-              reject(JSON.stringify(e));
+              reject(
+                JSON.stringify({
+                  message: e.message,
+                  stack: e.stack,
+                  code: e.code,
+                  body: e.body,
+                  status: e.status,
+                  statusText: e.statusText,
+                  headers: e.headers,
+                }),
+              );
             });
         });
 
