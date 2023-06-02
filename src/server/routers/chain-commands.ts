@@ -88,7 +88,7 @@ export const chainCommandsRouter = router({
               },
             )
             .catch((e) => {
-              reject(e);
+              reject(e.message);
             });
         });
         return { result, stdout, stderr };
