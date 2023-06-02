@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { kubeConfig } from '../kubermetes';
 import * as stream from 'stream';
 import * as k8s from '@kubernetes/client-node';
-import { allowedCommands } from '../../utils/publicRuntimeConfig';
 import { env } from '../env';
 
 const namespace = env.KUBERNETES_NAMESPACE;
@@ -88,6 +87,8 @@ export const chainCommandsRouter = router({
               },
             )
             .catch((e) => {
+              console.log('Error executing command: ' + JSON.stringify({ namespace, podName, debugCliPodContainerName, command }, null, 2));
+              console.log(JSON.stringify(e, null, 2));
               reject(JSON.stringify({ msg: e.message, body: e.body }));
             });
         });
