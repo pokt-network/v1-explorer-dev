@@ -69,28 +69,27 @@ export const chainCommandsRouter = router({
 
       try {
         const result = await new Promise<k8s.V1Status>((resolve, reject) => {
-          exec.exec(
-            namespace,
-            podName,
-            debugCliPodContainerName,
-            command,
-            stdoutStream,
-            stderrStream,
-            process.stdin as stream.Readable,
-            true /* tty */,
-            (status: k8s.V1Status) => {
-              // tslint:disable-next-line:no-console
-              console.log('Exited with status:');
-              // tslint:disable-next-line:no-console
-              console.log(JSON.stringify(status, null, 2));
-              resolve(status);
-            },
-          );
-        }).catch((e) => {
-          throw new TRPCError({
-            code: 'INTERNAL_SERVER_ERROR',
-            message: `Error exec: ${e}`,
-          });
+          exec
+            .exec(
+              namespace,
+              podName,
+              debugCliPodContainerName,
+              command,
+              stdoutStream,
+              stderrStream,
+              process.stdin as stream.Readable,
+              true /* tty */,
+              (status: k8s.V1Status) => {
+                // tslint:disable-next-line:no-console
+                console.log('Exited with status:');
+                // tslint:disable-next-line:no-console
+                console.log(JSON.stringify(status, null, 2));
+                resolve(status);
+              },
+            )
+            .catch((e) => {
+              reject(e);
+            });
         });
         return { result, stdout, stderr };
       } catch (e) {
