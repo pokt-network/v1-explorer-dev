@@ -5,23 +5,20 @@ import { Grid, Container, Table, Card } from '@nextui-org/react';
 import { StatsCard } from '~/components/StatsCard';
 import { parsePocketBlockDate } from '~/utils/misc';
 import { NetworkInfoCard } from '~/components/NetworkInfoCard';
-import { Block, QueryBlockResponse } from '~/utils/v1-rpc-client';
+import { latestBlock, latestHeight } from '~/utils/appState';
+import { useAtomValue } from 'jotai';
 
-type ExtendedQueryBlockResponse = QueryBlockResponse & Block;
+const IndexPage: NextPageWithLayout = () => {
+  const lBlock = useAtomValue(latestBlock);
+  const height = useAtomValue(latestHeight);
 
-const IndexPage: NextPageWithLayout = ({ height }) => {
-  // const latestBlockQuery = trpc.block.latest.useQuery();
-  const latestBlockQuery = trpc.rpc.queryBlock.useQuery(
-    { height },
-    { refetchInterval: 1000 },
-  );
   const valdatorCountQuery = trpc.rpc.listValidators.useQuery({
     height,
     page: 1,
   });
+
   // TODO: figure out why `block_header` is returned from rpc, but not just `block`.
-  const blockHeader = (latestBlockQuery.data as ExtendedQueryBlockResponse)
-    ?.block_header;
+  const blockHeader = lBlock?.block_header;
   const latestBlockTs = blockHeader?.timestamp
     ? parsePocketBlockDate(blockHeader.timestamp)
     : null;
@@ -31,23 +28,29 @@ const IndexPage: NextPageWithLayout = ({ height }) => {
     <>
       <Container>
         <Grid.Container gap={2} justify="center">
-          <Grid xs={3}>
+          <Grid xs={2}>
             <StatsCard title="Latest block" value={height} />
           </Grid>
-          <Grid xs={3}>
+          <Grid xs={2}>
             <StatsCard
               title="Since last block"
               value={latestBlockTs ? latestBlockTs.toNow() : 'N/A'}
             />
           </Grid>
-          <Grid xs={3}>
+          <Grid xs={2}>
+            <StatsCard title="Relays in last 24 hours" value={'N/A'} />
+          </Grid>
+          <Grid xs={2}>
+            <StatsCard title="Rewards in last 24 hours" value={'N/A'} />
+          </Grid>
+          <Grid xs={2}>
+            <StatsCard title="Number of applications" value={'N/A'} />
+          </Grid>
+          <Grid xs={2}>
             <StatsCard
-              title="Staked validators"
+              title="Number of nodes"
               value={valdatorCountQuery.data?.total_validators || 'N/A'}
             />
-          </Grid>
-          <Grid xs={3}>
-            <StatsCard title="Staked apps" value={'N/A'} />
           </Grid>
         </Grid.Container>
         <Grid.Container gap={2}>
