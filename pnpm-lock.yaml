@@ -5,8 +5,8 @@ dependencies:
     specifier: ^0.18.1
     version: 0.18.1
   '@nextui-org/react':
-    specifier: 1.0.0-beta.12
-    version: 1.0.0-beta.12(react-dom@18.2.0)(react@18.2.0)
+    specifier: 1.0.0-beta.13
+    version: 1.0.0-beta.13(react-dom@18.2.0)(react@18.2.0)
   '@prisma/client':
     specifier: ^4.14.1
     version: 4.14.1(prisma@4.14.1)
@@ -793,8 +793,8 @@ packages:
     dev: false
     optional: true
 
-  /@nextui-org/react@1.0.0-beta.12(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-ay6LrdRDwIFiZDvFH6nQjRuzLWE9yPQfI3W3qEfaY1I8e+CGYm0fc8RPSj3rrfZTa9OLeV+Defh/+/ysrwrloQ==}
+  /@nextui-org/react@1.0.0-beta.13(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-KrQZplcSyfRc95bHlvrNeu8FgGrTm4CncpdH9gFk5bNSELICbLplIyyy2e6C8ZmRD+0CAjjXLdbTx1yvmefqDg==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -906,11 +906,11 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.5
       '@react-aria/focus': 3.12.1(react@18.2.0)
-      '@react-aria/interactions': 3.12.0(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
-      '@react-stately/toggle': 3.4.2(react@18.2.0)
+      '@react-aria/interactions': 3.15.1(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
+      '@react-stately/toggle': 3.5.2(react@18.2.0)
       '@react-types/button': 3.7.3(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -922,11 +922,11 @@ packages:
       '@babel/runtime': 7.21.5
       '@react-aria/label': 3.4.2(react@18.2.0)
       '@react-aria/toggle': 3.6.1(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
       '@react-stately/checkbox': 3.3.0(react@18.2.0)
-      '@react-stately/toggle': 3.4.2(react@18.2.0)
-      '@react-types/checkbox': 3.4.0(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-stately/toggle': 3.5.2(react@18.2.0)
+      '@react-types/checkbox': 3.4.4(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -938,10 +938,10 @@ packages:
       '@babel/runtime': 7.21.5
       '@react-aria/focus': 3.12.1(react@18.2.0)
       '@react-aria/overlays': 3.11.0(react-dom@18.2.0)(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
       '@react-stately/overlays': 3.4.2(react@18.2.0)
       '@react-types/dialog': 3.5.2(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
       - react-dom
@@ -966,9 +966,9 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-aria/interactions': 3.12.0(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-aria/interactions': 3.15.1(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       clsx: 1.1.1
       react: 18.2.0
     dev: false
@@ -1007,9 +1007,9 @@ packages:
       '@internationalized/message': 3.1.0
       '@internationalized/number': 3.2.0
       '@internationalized/string': 3.1.0
-      '@react-aria/ssr': 3.3.0(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-aria/ssr': 3.6.0(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1035,8 +1035,8 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-aria/utils': 3.14.0(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1058,9 +1058,9 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-aria/utils': 3.14.0(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
       '@react-types/label': 3.7.4(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1071,10 +1071,10 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.5
       '@react-aria/focus': 3.12.1(react@18.2.0)
-      '@react-aria/interactions': 3.12.0(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
+      '@react-aria/interactions': 3.15.1(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
       '@react-types/link': 3.4.2(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1091,17 +1091,17 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-aria/i18n': 3.6.1(react@18.2.0)
-      '@react-aria/interactions': 3.12.0(react@18.2.0)
+      '@react-aria/i18n': 3.7.2(react@18.2.0)
+      '@react-aria/interactions': 3.15.1(react@18.2.0)
       '@react-aria/overlays': 3.11.0(react-dom@18.2.0)(react@18.2.0)
       '@react-aria/selection': 3.15.0(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
-      '@react-stately/collections': 3.4.4(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
+      '@react-stately/collections': 3.8.0(react@18.2.0)
       '@react-stately/menu': 3.4.2(react@18.2.0)
       '@react-stately/tree': 3.3.4(react@18.2.0)
       '@react-types/button': 3.7.3(react@18.2.0)
       '@react-types/menu': 3.7.2(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -1114,15 +1114,15 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.5
       '@react-aria/focus': 3.12.1(react@18.2.0)
-      '@react-aria/i18n': 3.6.1(react@18.2.0)
-      '@react-aria/interactions': 3.12.0(react@18.2.0)
-      '@react-aria/ssr': 3.3.0(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
+      '@react-aria/i18n': 3.7.2(react@18.2.0)
+      '@react-aria/interactions': 3.15.1(react@18.2.0)
+      '@react-aria/ssr': 3.6.0(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
       '@react-aria/visually-hidden': 3.5.0(react@18.2.0)
       '@react-stately/overlays': 3.4.2(react@18.2.0)
       '@react-types/button': 3.7.3(react@18.2.0)
-      '@react-types/overlays': 3.6.4(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/overlays': 3.7.2(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -1134,13 +1134,13 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.5
       '@react-aria/focus': 3.12.1(react@18.2.0)
-      '@react-aria/i18n': 3.6.1(react@18.2.0)
-      '@react-aria/interactions': 3.12.0(react@18.2.0)
+      '@react-aria/i18n': 3.7.2(react@18.2.0)
+      '@react-aria/interactions': 3.15.1(react@18.2.0)
       '@react-aria/label': 3.4.2(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
       '@react-stately/radio': 3.6.0(react@18.2.0)
       '@react-types/radio': 3.4.2(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1187,16 +1187,16 @@ packages:
       '@babel/runtime': 7.21.5
       '@react-aria/focus': 3.12.1(react@18.2.0)
       '@react-aria/grid': 3.7.1(react-dom@18.2.0)(react@18.2.0)
-      '@react-aria/i18n': 3.6.1(react@18.2.0)
-      '@react-aria/interactions': 3.12.0(react@18.2.0)
+      '@react-aria/i18n': 3.7.2(react@18.2.0)
+      '@react-aria/interactions': 3.15.1(react@18.2.0)
       '@react-aria/live-announcer': 3.3.0
       '@react-aria/selection': 3.15.0(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
       '@react-stately/table': 3.5.0(react@18.2.0)
       '@react-stately/virtualizer': 3.5.2(react@18.2.0)
-      '@react-types/checkbox': 3.4.0(react@18.2.0)
-      '@react-types/grid': 3.1.4(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/checkbox': 3.4.4(react@18.2.0)
+      '@react-types/grid': 3.1.8(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       '@react-types/table': 3.6.1(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -1224,9 +1224,9 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-aria/ssr': 3.3.0(react@18.2.0)
+      '@react-aria/ssr': 3.6.0(react@18.2.0)
       '@react-stately/utils': 3.6.0(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       clsx: 1.1.1
       react: 18.2.0
     dev: false
@@ -1250,9 +1250,9 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-aria/interactions': 3.12.0(react@18.2.0)
-      '@react-aria/utils': 3.14.0(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-aria/interactions': 3.15.1(react@18.2.0)
+      '@react-aria/utils': 3.17.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       clsx: 1.1.1
       react: 18.2.0
     dev: false
@@ -1263,10 +1263,10 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-stately/toggle': 3.4.2(react@18.2.0)
+      '@react-stately/toggle': 3.5.2(react@18.2.0)
       '@react-stately/utils': 3.6.0(react@18.2.0)
-      '@react-types/checkbox': 3.4.0(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/checkbox': 3.4.4(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1276,7 +1276,7 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1296,7 +1296,7 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1322,7 +1322,7 @@ packages:
       '@react-stately/overlays': 3.4.2(react@18.2.0)
       '@react-stately/utils': 3.6.0(react@18.2.0)
       '@react-types/menu': 3.7.2(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1333,7 +1333,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.5
       '@react-stately/utils': 3.6.0(react@18.2.0)
-      '@react-types/overlays': 3.6.4(react@18.2.0)
+      '@react-types/overlays': 3.7.2(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1345,7 +1345,7 @@ packages:
       '@babel/runtime': 7.21.5
       '@react-stately/utils': 3.6.0(react@18.2.0)
       '@react-types/radio': 3.4.2(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1367,11 +1367,11 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-stately/collections': 3.4.4(react@18.2.0)
+      '@react-stately/collections': 3.8.0(react@18.2.0)
       '@react-stately/grid': 3.6.1(react@18.2.0)
       '@react-stately/selection': 3.13.1(react@18.2.0)
-      '@react-types/grid': 3.1.4(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/grid': 3.1.8(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       '@react-types/table': 3.6.1(react@18.2.0)
       react: 18.2.0
     dev: false
@@ -1383,8 +1383,8 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.5
       '@react-stately/utils': 3.6.0(react@18.2.0)
-      '@react-types/checkbox': 3.4.0(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/checkbox': 3.4.4(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1406,10 +1406,10 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
-      '@react-stately/collections': 3.4.4(react@18.2.0)
+      '@react-stately/collections': 3.8.0(react@18.2.0)
       '@react-stately/selection': 3.13.1(react@18.2.0)
       '@react-stately/utils': 3.6.0(react@18.2.0)
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1447,7 +1447,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1475,7 +1475,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
-      '@react-types/shared': 3.15.0(react@18.2.0)
+      '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1512,7 +1512,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
-      '@react-types/overlays': 3.6.4(react@18.2.0)
+      '@react-types/overlays': 3.7.2(react@18.2.0)
       '@react-types/shared': 3.18.1(react@18.2.0)
       react: 18.2.0
     dev: false
