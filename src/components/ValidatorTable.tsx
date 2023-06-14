@@ -99,6 +99,14 @@ export const ValidatorTable = ({ ...cardProps }) => {
       key: 'service_url',
       label: 'Service URL',
     },
+    {
+      key: 'paused_height',
+      label: 'Paused height',
+    },
+    {
+      key: 'chains',
+      label: 'Chains',
+    },
   ];
 
   if (!isReadyToCall) {
@@ -158,6 +166,8 @@ export const ValidatorTable = ({ ...cardProps }) => {
                   <Table.Cell>{item.address}</Table.Cell>
                   <Table.Cell>{item.staked_amount}</Table.Cell>
                   <Table.Cell>{item.service_url}</Table.Cell>
+                  <Table.Cell>{item.paused_height}</Table.Cell>
+                  <Table.Cell>{item.chains}</Table.Cell>
                 </Table.Row>
               )}
             </Table.Body>

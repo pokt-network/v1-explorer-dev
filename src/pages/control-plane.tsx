@@ -75,7 +75,12 @@ const ChainControlPage: NextPageWithLayout = () => {
   return (
     <>
       <Container>
+        <Grid xs={12}></Grid>
         <Grid.Container gap={2} justify="center">
+          <Text b css={{ my: '10px' }}>
+            This functionality might not work on some networks, please use `p1`
+            CLI client instead.
+          </Text>
           <Button.Group
             // color="gradient"
             ghost

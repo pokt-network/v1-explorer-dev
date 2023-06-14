@@ -3,14 +3,13 @@ import type { AppType, AppProps } from 'next/app';
 import { ReactElement, ReactNode, useEffect } from 'react';
 import { DefaultLayout } from '~/components/DefaultLayout';
 import { trpc } from '~/utils/trpc';
-import { Navbar, NextUIProvider, Text, Button } from '@nextui-org/react';
+import { Navbar, NextUIProvider, Text } from '@nextui-org/react';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import {
   ExtendedQueryBlockResponse,
-  latestBlocks,
   latestBlock,
   latestHeight,
   latestBlockHeight,
@@ -19,6 +18,10 @@ import {
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 dayjs.extend(relativeTime);
 dayjs.extend(customParseFormat);
+
+BigInt.prototype.toJSON = function () {
+  return this.toString();
+};
 
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
@@ -109,12 +112,3 @@ const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
 }) as AppType;
 
 export default trpc.withTRPC(MyApp);
-function useUpdateAtom(
-  addBlock: import('jotai').WritableAtom<
-    null,
-    [newBlock: ExtendedQueryBlockResponse],
-    void
-  > & { init: null },
-) {
-  throw new Error('Function not implemented.');
-}

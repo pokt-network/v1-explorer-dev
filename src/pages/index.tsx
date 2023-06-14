@@ -28,25 +28,25 @@ const IndexPage: NextPageWithLayout = () => {
     <>
       <Container>
         <Grid.Container gap={2} justify="center">
-          <Grid xs={2}>
+          <Grid xs={4} md={2}>
             <StatsCard title="Latest block" value={height} />
           </Grid>
-          <Grid xs={2}>
+          <Grid xs={4} md={2}>
             <StatsCard
               title="Since last block"
               value={latestBlockTs ? latestBlockTs.fromNow() : 'N/A'}
             />
           </Grid>
-          <Grid xs={2}>
+          <Grid xs={4} md={2}>
             <StatsCard title="Relays in last 24 hours" value={'N/A'} />
           </Grid>
-          <Grid xs={2}>
+          <Grid xs={4} md={2}>
             <StatsCard title="Rewards in last 24 hours" value={'N/A'} />
           </Grid>
-          <Grid xs={2}>
+          <Grid xs={4} md={2}>
             <StatsCard title="Number of applications" value={'N/A'} />
           </Grid>
-          <Grid xs={2}>
+          <Grid xs={4} md={2}>
             <StatsCard
               title="Number of nodes"
               value={valdatorCountQuery.data?.total_validators || 'N/A'}
