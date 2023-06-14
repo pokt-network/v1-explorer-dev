@@ -7,15 +7,18 @@ import { Navbar, NextUIProvider, Text, Button } from '@nextui-org/react';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import {
   ExtendedQueryBlockResponse,
   latestBlocks,
   latestBlock,
   latestHeight,
   latestBlockHeight,
+  addBlock,
 } from '~/utils/appState';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 dayjs.extend(relativeTime);
+dayjs.extend(customParseFormat);
 
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
@@ -41,16 +44,17 @@ const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
     heightQuery.data.height !== null &&
     heightQuery.data.height !== undefined;
 
+  // Connect app state with the Pocket RPC.
   const [height, setHeight] = useAtom(latestHeight);
-  const [blocks, setBlocks] = useAtom(latestBlocks);
-  const lBlock = useAtomValue(latestBlock);
-  const lBlockHeight = useAtomValue(latestBlockHeight);
   heightQueryDataPresent && setHeight(BigInt(heightQuery.data.height));
+  const lBlockHeight = useAtomValue(latestBlockHeight);
+  const addLatestBlock = useSetAtom(addBlock);
 
   const latestBlockQuery = trpc.rpc.queryBlock.useQuery({
     height: height,
   });
 
+  // Update latest block when height changes.
   useEffect(() => {
     console.log('latestBlockHeight: ' + lBlockHeight);
     console.log(latestBlock);
@@ -59,19 +63,15 @@ const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
       // Get new block and add it to latestBlocks.
       const block = latestBlockQuery.data as ExtendedQueryBlockResponse;
       if (latestBlockQuery.data) {
-        setBlocks((prevBlocks) => {
-          const newBlocks = [...prevBlocks, block];
-          if (newBlocks.length > 3) {
-            // If more than 3 blocks, remove the oldest one(s).
-            return newBlocks.slice(-3);
-          } else {
-            // TODO: populate with historical data.
-            return newBlocks;
-          }
-        });
+        addLatestBlock(block);
       }
     }
-  }, [height, blocks, setBlocks, lBlock, latestBlockQuery, lBlockHeight]); // this array of dependencies tells React to run the effect whenever `height` changes
+  }, [height, latestBlockQuery, lBlockHeight, addLatestBlock]);
+
+  // Update a list of all actors when a new block is added.
+  useEffect(() => {
+    console.log('new latestBlockHeight: ' + lBlockHeight);
+  }, [lBlockHeight]);
 
   const errorMessage = heightQuery.error ? (
     <Text>error: {JSON.stringify(heightQuery.error)}</Text>
@@ -109,3 +109,12 @@ const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
 }) as AppType;
 
 export default trpc.withTRPC(MyApp);
+function useUpdateAtom(
+  addBlock: import('jotai').WritableAtom<
+    null,
+    [newBlock: ExtendedQueryBlockResponse],
+    void
+  > & { init: null },
+) {
+  throw new Error('Function not implemented.');
+}

@@ -1,7 +1,7 @@
 import { ValidatorTable } from '~/components/ValidatorTable';
 import { trpc } from '../utils/trpc';
 import { NextPageWithLayout } from './_app';
-import { Grid, Container, Table, Card } from '@nextui-org/react';
+import { Grid, Container, Table, Card, Text, Button } from '@nextui-org/react';
 import { StatsCard } from '~/components/StatsCard';
 import { parsePocketBlockDate } from '~/utils/misc';
 import { NetworkInfoCard } from '~/components/NetworkInfoCard';
@@ -34,7 +34,7 @@ const IndexPage: NextPageWithLayout = () => {
           <Grid xs={2}>
             <StatsCard
               title="Since last block"
-              value={latestBlockTs ? latestBlockTs.toNow() : 'N/A'}
+              value={latestBlockTs ? latestBlockTs.fromNow() : 'N/A'}
             />
           </Grid>
           <Grid xs={2}>
@@ -55,9 +55,7 @@ const IndexPage: NextPageWithLayout = () => {
         </Grid.Container>
         <Grid.Container gap={2}>
           <Grid xs={8}>
-            <Card>
-              <ValidatorTable height={height} />
-            </Card>
+            <ValidatorTable height={height} />
           </Grid>
           <Grid xs={4}>
             <NetworkInfoCard />
