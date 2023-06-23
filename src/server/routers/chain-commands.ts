@@ -1,7 +1,7 @@
 import { router, publicProcedure } from '../trpc';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { kubeConfig } from '../kubermetes';
+import { kubeConfig } from '../kubernetes';
 import * as stream from 'stream';
 import * as k8s from '@kubernetes/client-node';
 import { env } from '../env';

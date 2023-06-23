@@ -12,6 +12,7 @@ const envSchema = z.object({
   DATABASE_URL: z.string().url(),
   KUBERNETES_NAMESPACE: z.string(),
   NETWORK_NAME: z.string(),
+  NETWORK_PARAMETERS_CM_NAME: z.string(),
   NODE_ENV: z.enum(['development', 'test', 'production']),
   POCKET_RPC_ENDPOINT: z.string().url(),
 });
