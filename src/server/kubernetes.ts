@@ -4,18 +4,30 @@
  */
 import { env } from './env';
 import * as k8s from '@kubernetes/client-node';
-import * as yaml from 'js-yaml';
-import * as https from 'https';
 
 const kubeConfigGlobal = global as typeof global & {
   kubeConfig: k8s.KubeConfig;
 };
 
-const PARAMETERS_DEFAULTS_URL =
-  'https://v1-networks-parameters.dev-us-east4-1.poktnodes.network:8443/defaults';
-
 const config = new k8s.KubeConfig();
 config.loadFromDefault();
+
+const namespace = env.KUBERNETES_NAMESPACE;
+const name = env.NETWORK_PARAMETERS_CM_NAME;
+const DEFAULT_VALUES = {
+  validators: {
+    count: 4,
+  },
+  full_nodes: {
+    count: 1,
+  },
+  fishermen: {
+    count: 1,
+  },
+  servicers: {
+    count: 1,
+  },
+};
 
 // env.NODE_ENV === 'development'
 //   ? config.loadFromDefault()
@@ -28,34 +40,15 @@ if (env.NODE_ENV !== 'production') {
 }
 
 export const k8sApi = kubeConfig.makeApiClient(k8s.CoreV1Api);
-export const readOrCreateYamlConfigMap = async () => {
-  const namespace = env.KUBERNETES_NAMESPACE;
-  const name = env.NETWORK_PARAMETERS_CM_NAME;
 
+export const readOrCreateNetworkParametersConfigMap = async () => {
   try {
     const cm = await k8sApi.readNamespacedConfigMap(name, namespace);
     return cm.body.data && cm.body.data['network-parameters'];
+    // If id doesn't exist, create with default values
   } catch (error) {
     const err = error as Error & { response?: { statusCode?: number } };
-    // console.log('error on `readNamespacedConfigMap`', err.response);
     if (err.response && err.response.statusCode === 404) {
-      // Get default values
-      const body = await new Promise<string>((resolve, reject) => {
-        https.get(PARAMETERS_DEFAULTS_URL, (res) => {
-          let body = '';
-
-          res.on('data', (chunk) => {
-            body += chunk;
-          });
-
-          res.on('end', () => {
-            resolve(body);
-          });
-
-          res.on('error', reject);
-        });
-      });
-
       try {
         const payload = {
           metadata: {
@@ -63,10 +56,9 @@ export const readOrCreateYamlConfigMap = async () => {
             namespace,
           },
           data: {
-            'network-parameters': body,
+            'network-parameters': JSON.stringify(DEFAULT_VALUES, null, 2),
           },
         };
-        console.log(JSON.stringify(payload));
         const newCM = await k8sApi.createNamespacedConfigMap(
           namespace,
           payload,
@@ -79,4 +71,40 @@ export const readOrCreateYamlConfigMap = async () => {
       throw err;
     }
   }
+};
+
+export const writeNetworkParametersConfigMap = async (newParams: any) => {
+  // Make sure the config map exists
+  const currentParameters = await readOrCreateNetworkParametersConfigMap();
+  if (!currentParameters) {
+    throw new Error(
+      'Could not read network parameters config map, and could not create it either',
+    );
+  }
+  const currentParametersJson = JSON.parse(currentParameters);
+  const newParamsJson = JSON.parse(newParams);
+  const newParametersJson = { ...currentParametersJson, ...newParamsJson };
+  // console.log(currentParametersJson);
+  // console.log(newParamsJson);
+  // console.log(newParametersJson);
+
+  const k8sres = await k8sApi.patchNamespacedConfigMap(
+    name,
+    namespace,
+    [
+      {
+        op: 'replace',
+        path: '/data/network-parameters',
+        value: JSON.stringify(newParametersJson, null, 2),
+      },
+    ],
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    { headers: { 'Content-Type': 'application/json-patch+json' } },
+  );
+  console.log(k8sres.body);
+  return k8sres.body.data && k8sres.body.data['network-parameters'];
 };
