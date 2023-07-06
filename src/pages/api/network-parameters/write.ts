@@ -28,7 +28,7 @@ import { writeNetworkParametersConfigMap } from '~/server/kubernetes';
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const updatedParameters = await writeNetworkParametersConfigMap(
-      req.body['network-parameters'],
+      JSON.parse(req.body['network-parameters']),
     );
     res.status(200).send(updatedParameters);
   } catch (err: any) {

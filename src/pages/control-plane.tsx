@@ -1,19 +1,11 @@
 import { trpc } from '../utils/trpc';
 import { NextPageWithLayout } from './_app';
-import {
-  Grid,
-  Container,
-  Table,
-  Card,
-  Button,
-  Link,
-  Text,
-} from '@nextui-org/react';
-import { StatsCard } from '~/components/StatsCard';
+import { Grid, Card, Button, Text } from '@nextui-org/react';
 
 import { allowedCommands } from '../utils/publicRuntimeConfig';
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import { NetworkScaleCard } from '~/components/NetworkScaleCard';
 
 type CommandHistoryItem = {
   command: string;
@@ -28,7 +20,6 @@ const ChainControlPage: NextPageWithLayout = () => {
   const heightQuery = trpc.rpc.height.useQuery();
   const executeCommand = trpc.chainCommands.executeCommand.useMutation({
     onSuccess(data, variables, context) {
-      console.log(data);
       heightQuery.refetch();
       setCommandHistory((prev) => [
         {
@@ -60,56 +51,69 @@ const ChainControlPage: NextPageWithLayout = () => {
 
   const buttons = allowedCommands.map((commandName) => {
     return (
-      <Button
-        key={commandName}
-        onClick={async () => {
-          const response = await executeCommand.mutateAsync({ commandName });
-          console.log(response);
-        }}
-      >
-        {commandName}
-      </Button>
+      <Grid key={commandName}>
+        <Button
+          onClick={async () => {
+            const response = await executeCommand.mutateAsync({ commandName });
+          }}
+          size="sm"
+          disabled={executeCommand.isLoading}
+          ghost
+        >
+          {commandName}
+        </Button>
+      </Grid>
     );
   });
 
   return (
     <>
-      <Container>
-        <Grid xs={12}></Grid>
-        <Grid.Container gap={2} justify="center">
-          <Text b css={{ my: '10px' }}>
-            This functionality might not work on some networks, please use `p1`
-            CLI client instead.
-          </Text>
-          <Button.Group
-            // color="gradient"
-            ghost
-            auto
-            size="sm"
-            disabled={executeCommand.isLoading}
-          >
-            {buttons}
-          </Button.Group>
-        </Grid.Container>
+      <Grid.Container gap={2}>
+        <Grid css={{ width: '100%' }}>
+          <NetworkScaleCard />
+        </Grid>
+        <Grid css={{ width: '100%' }}>
+          <Card>
+            <Card.Header>
+              <Text h3>Network commands</Text>
+            </Card.Header>
+            <Card.Body>
+              <Text b css={{ my: '10px' }}>
+                This functionality might not work on some networks, please use
+                the `p1` CLI client instead if experiencing errors below.
+              </Text>
+              {/* <Button.Group
+                  // color="gradient"
+                  ghost
+                  auto
+                  size="sm"
+                  disabled={executeCommand.isLoading}
+                > */}
 
-        <Grid.Container gap={2} justify="center">
-          {commandHistory.map((item, index) => (
-            <Grid xs={12} key={index}>
-              <Card key={index}>
-                <Card.Header>
-                  {item.status === 'success' ? '✅' : '❌'} {item.command}{' '}
-                  {dayjs(item.timestamp).fromNow()}
-                </Card.Header>
-                <Card.Body>
-                  <Text>{item.error}</Text>
-                  <Text>{item.stdout}</Text>
-                  <Text>{item.stderr}</Text>
-                </Card.Body>
-              </Card>
-            </Grid>
-          ))}
-        </Grid.Container>
-      </Container>
+              {/* </Button.Group> */}
+              <Grid.Container gap={2}>{buttons}</Grid.Container>
+
+              <Grid.Container gap={2} justify="center">
+                {commandHistory.map((item, index) => (
+                  <Grid xs={12} key={index}>
+                    <Card key={index}>
+                      <Card.Header>
+                        {item.status === 'success' ? '✅' : '❌'} {item.command}{' '}
+                        {dayjs(item.timestamp).fromNow()}
+                      </Card.Header>
+                      <Card.Body>
+                        <Text>{item.error}</Text>
+                        <Text>{item.stdout}</Text>
+                        <Text>{item.stderr}</Text>
+                      </Card.Body>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid.Container>
+            </Card.Body>
+          </Card>
+        </Grid>
+      </Grid.Container>
     </>
   );
 };

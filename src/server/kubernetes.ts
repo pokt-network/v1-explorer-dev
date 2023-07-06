@@ -2,6 +2,7 @@
  * Instantiates a single instance of KubernetesClient and save it on the global object.
  * @link https://github.com/godaddy/kubernetes-client
  */
+import { z } from 'zod';
 import { env } from './env';
 import * as k8s from '@kubernetes/client-node';
 
@@ -73,6 +74,18 @@ export const readOrCreateNetworkParametersConfigMap = async () => {
   }
 };
 
+const ActorSchema = z.object({
+  count: z.number().int().positive(),
+});
+
+// Define the schema for all the actors
+export const writeNetworkParametersConfigMapValidation = z.object({
+  fishermen: ActorSchema.optional(),
+  full_nodes: ActorSchema.optional(),
+  servicers: ActorSchema.optional(),
+  validators: ActorSchema.optional(),
+});
+
 export const writeNetworkParametersConfigMap = async (newParams: any) => {
   // Make sure the config map exists
   const currentParameters = await readOrCreateNetworkParametersConfigMap();
@@ -81,12 +94,11 @@ export const writeNetworkParametersConfigMap = async (newParams: any) => {
       'Could not read network parameters config map, and could not create it either',
     );
   }
+
   const currentParametersJson = JSON.parse(currentParameters);
-  const newParamsJson = JSON.parse(newParams);
-  const newParametersJson = { ...currentParametersJson, ...newParamsJson };
-  // console.log(currentParametersJson);
-  // console.log(newParamsJson);
-  // console.log(newParametersJson);
+  const newParamsValidated =
+    writeNetworkParametersConfigMapValidation.parse(newParams);
+  const newParametersJson = { ...currentParametersJson, ...newParamsValidated };
 
   const k8sres = await k8sApi.patchNamespacedConfigMap(
     name,
@@ -105,6 +117,5 @@ export const writeNetworkParametersConfigMap = async (newParams: any) => {
     undefined,
     { headers: { 'Content-Type': 'application/json-patch+json' } },
   );
-  console.log(k8sres.body);
   return k8sres.body.data && k8sres.body.data['network-parameters'];
 };

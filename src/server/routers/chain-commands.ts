@@ -1,7 +1,12 @@
 import { router, publicProcedure } from '../trpc';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { kubeConfig } from '../kubernetes';
+import {
+  kubeConfig,
+  readOrCreateNetworkParametersConfigMap,
+  writeNetworkParametersConfigMap,
+  writeNetworkParametersConfigMapValidation,
+} from '../kubernetes';
 import * as stream from 'stream';
 import * as k8s from '@kubernetes/client-node';
 import { env } from '../env';
@@ -127,5 +132,14 @@ export const chainCommandsRouter = router({
           message: `Error executing command: ${e}`,
         });
       }
+    }),
+  getCurrentScale: publicProcedure.query(
+    readOrCreateNetworkParametersConfigMap,
+  ),
+  scaleActors: publicProcedure
+    .input(writeNetworkParametersConfigMapValidation)
+    .mutation(async ({ input }) => {
+      console.log('input', input);
+      return await writeNetworkParametersConfigMap(input);
     }),
 });
