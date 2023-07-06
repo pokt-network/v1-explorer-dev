@@ -56,12 +56,12 @@ export const NetworkScaleCard = () => {
     }
   }, [currentActorCountsQuery.data]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setState((oldState) => ({ ...oldState, [name]: Number(value) }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     // Create a new object with the right structure
     const formattedState = {
