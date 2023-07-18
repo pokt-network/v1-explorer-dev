@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import { ReactElement, ReactNode, useEffect } from 'react';
 import { DefaultLayout } from '~/components/DefaultLayout';
 import { trpc } from '~/utils/trpc';
-import { NextUIProvider } from '@nextui-org/system';
+import { NextUIProvider } from '@nextui-org/react';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -24,8 +24,8 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from '@nextui-org/navbar';
-import { Link } from '@nextui-org/link';
+} from '@nextui-org/react';
+import { Link } from '@nextui-org/react';
 
 dayjs.extend(relativeTime);
 dayjs.extend(customParseFormat);

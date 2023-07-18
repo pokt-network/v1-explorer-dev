@@ -8,29 +8,12 @@ import {
   TableBody,
   TableRow,
   TableCell,
-} from '@nextui-org/table';
-
-// import {
-//   Button,
-//   Card,
-//   CardProps,
-//   Table,
-//   CardHeader,
-//   TableCell,
-//   ButtonGroup,
-//   CardBody,
-//   TableHeader,
-//   TableColumn,
-//   TableBody,
-//   TableRow,
-//   Tab,
-//   Tabs,
-// } from '@nextui-org/react';
+} from '@nextui-org/react';
 import { latestBlockHeight } from '~/utils/appState';
 import { useState } from 'react';
 import { ActorTypesEnum } from '~/utils/v1-rpc-client';
-import { Card, CardBody } from '@nextui-org/card';
-import { Tab, Tabs } from '@nextui-org/tabs';
+import { Card, CardBody } from '@nextui-org/react';
+import { Tab, Tabs } from '@nextui-org/react';
 
 declare global {
   interface BigInt {

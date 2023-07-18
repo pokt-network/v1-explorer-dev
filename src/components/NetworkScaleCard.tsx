@@ -2,9 +2,9 @@
 // import { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { trpc } from '~/utils/trpc';
-import { Card, CardBody, CardHeader } from '@nextui-org/card';
-import { Input } from '@nextui-org/input';
-import { Button } from '@nextui-org/button';
+import { Card, CardBody, CardHeader } from '@nextui-org/react';
+import { Input } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 
 // type NetworkScaleCardProps = {
 //   title: ReactNode;
