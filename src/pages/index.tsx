@@ -1,3 +1,4 @@
+'use client';
 import { ValidatorTable } from '~/components/ValidatorTable';
 import { trpc } from '../utils/trpc';
 import { NextPageWithLayout } from './_app';

@@ -1,3 +1,4 @@
+'use client';
 import { trpc } from '../utils/trpc';
 import { NextPageWithLayout } from './_app';
 import { Card, Button, CardBody, CardHeader } from '@nextui-org/react';
