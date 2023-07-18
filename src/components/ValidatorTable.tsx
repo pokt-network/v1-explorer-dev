@@ -1,24 +1,36 @@
 import { atom, useAtom, useAtomValue } from 'jotai';
 import { trpc } from '../utils/trpc';
+
 import {
-  Button,
-  Card,
-  CardProps,
   Table,
-  CardHeader,
-  TableCell,
-  ButtonGroup,
-  CardBody,
   TableHeader,
   TableColumn,
   TableBody,
   TableRow,
-  Tab,
-  Tabs,
-} from '@nextui-org/react';
+  TableCell,
+} from '@nextui-org/table';
+
+// import {
+//   Button,
+//   Card,
+//   CardProps,
+//   Table,
+//   CardHeader,
+//   TableCell,
+//   ButtonGroup,
+//   CardBody,
+//   TableHeader,
+//   TableColumn,
+//   TableBody,
+//   TableRow,
+//   Tab,
+//   Tabs,
+// } from '@nextui-org/react';
 import { latestBlockHeight } from '~/utils/appState';
 import { useState } from 'react';
 import { ActorTypesEnum } from '~/utils/v1-rpc-client';
+import { Card, CardBody } from '@nextui-org/card';
+import { Tab, Tabs } from '@nextui-org/tabs';
 
 declare global {
   interface BigInt {

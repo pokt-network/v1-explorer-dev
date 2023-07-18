@@ -1,12 +1,13 @@
 'use client';
 import { trpc } from '../utils/trpc';
 import { NextPageWithLayout } from './_app';
-import { Card, Button, CardBody, CardHeader } from '@nextui-org/react';
 
 import { allowedCommands } from '../utils/publicRuntimeConfig';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import { NetworkScaleCard } from '~/components/NetworkScaleCard';
+import { Button } from '@nextui-org/button';
+import { Card, CardBody, CardHeader } from '@nextui-org/card';
 
 type CommandHistoryItem = {
   command: string;

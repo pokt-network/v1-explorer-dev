@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { ReactNode } from 'react';
-import { Card, CardBody, CardHeader, CardProps, Link } from '@nextui-org/react';
 import { trpc } from '~/utils/trpc';
+import {Card,CardBody,CardHeader,CardProps} from "@nextui-org/card";
+import { Link } from '@nextui-org/link';
 
 type NetworkInfoCardProps = Partial<CardProps>;
 

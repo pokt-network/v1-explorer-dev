@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { ReactNode } from 'react';
-import { Card, CardProps, CardBody } from '@nextui-org/react';
+import { Card, CardBody, CardProps } from '@nextui-org/card';
 
 type StatsCardProps = {
   title: ReactNode;

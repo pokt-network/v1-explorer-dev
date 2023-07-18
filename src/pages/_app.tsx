@@ -4,14 +4,7 @@ import NextLink from 'next/link';
 import { ReactElement, ReactNode, useEffect } from 'react';
 import { DefaultLayout } from '~/components/DefaultLayout';
 import { trpc } from '~/utils/trpc';
-import {
-  Link,
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NextUIProvider,
-} from '@nextui-org/react';
+import { NextUIProvider } from '@nextui-org/react';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -26,6 +19,13 @@ import {
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import '../styles/globals.css';
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+} from '@nextui-org/navbar';
+import { Link } from '@nextui-org/link';
 
 dayjs.extend(relativeTime);
 dayjs.extend(customParseFormat);
