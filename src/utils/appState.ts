@@ -28,6 +28,17 @@ export const addBlock = atom(
 export const latestBlockHeight = atom(
   (get) => get(latestBlock)?.block_header.height,
 );
+
+// export const latestBlockRewards = atom(
+//   (get) => {
+//     const lb = get(latestBlock)
+//     lb?.transactions.forEach((tx) => {
+//       // Look for proofs/claims in tx.tx.txMsg.message
+//     })
+//     return get(latestBlock)?.block_header.height;
+//   },
+// );
+
 export const latestHeight = atom<bigint>(BigInt(0));
 
 // export const listValidators = atom<ProtocolActor[]>([]);

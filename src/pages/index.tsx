@@ -17,6 +17,11 @@ const IndexPage: NextPageWithLayout = () => {
     page: 1,
   });
 
+  const applicationCountQuery = trpc.rpc.listApplications.useQuery({
+    height,
+    page: 1,
+  });
+
   // TODO: figure out why `block_header` is returned from rpc, but not just `block`.
   const blockHeader = lBlock?.block_header;
   const latestBlockTs = blockHeader?.timestamp
@@ -36,13 +41,13 @@ const IndexPage: NextPageWithLayout = () => {
           />
         </Grid>
         <Grid xs={4} md={2}>
-          <StatsCard title="Relays in last 24 hours" value={'N/A'} />
+          <StatsCard title="Relays in last block" value={'N/A'} />
         </Grid>
         <Grid xs={4} md={2}>
-          <StatsCard title="Rewards in last 24 hours" value={'N/A'} />
+          <StatsCard title="Rewards in last block" value={'N/A'} />
         </Grid>
         <Grid xs={4} md={2}>
-          <StatsCard title="Number of applications" value={'N/A'} />
+          <StatsCard title="Number of applications" value={applicationCountQuery.data?.total_apps || 'N/A'} />
         </Grid>
         <Grid xs={4} md={2}>
           <StatsCard
