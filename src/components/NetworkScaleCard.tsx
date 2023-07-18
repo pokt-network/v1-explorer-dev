@@ -1,6 +1,6 @@
 // import Head from 'next/head';
 // import { ReactNode } from 'react';
-import { Button, Card, Grid, Input, Text } from '@nextui-org/react';
+import { Button, Card, Input, CardHeader, CardBody } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { trpc } from '~/utils/trpc';
 
@@ -11,10 +11,10 @@ import { trpc } from '~/utils/trpc';
 
 export const NetworkScaleCard = () => {
   const [state, setState] = useState({
-    validators: 0,
-    servicers: 0,
-    fishermen: 0,
-    full_nodes: 0,
+    validators: '0',
+    servicers: '0',
+    fishermen: '0',
+    full_nodes: '0',
   });
 
   const currentActorCountsQuery = trpc.chainCommands.getCurrentScale.useQuery(
@@ -58,17 +58,17 @@ export const NetworkScaleCard = () => {
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setState((oldState) => ({ ...oldState, [name]: Number(value) }));
+    setState((oldState) => ({ ...oldState, [name]: value }));
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     // Create a new object with the right structure
     const formattedState = {
-      validators: { count: state.validators },
-      servicers: { count: state.servicers },
-      fishermen: { count: state.fishermen },
-      full_nodes: { count: state.full_nodes },
+      validators: { count: Number(state.validators) },
+      servicers: { count: Number(state.servicers) },
+      fishermen: { count: Number(state.fishermen) },
+      full_nodes: { count: Number(state.full_nodes) },
     };
 
     newActorCountsMutation.mutate(formattedState);
@@ -76,56 +76,48 @@ export const NetworkScaleCard = () => {
 
   return (
     <Card>
-      <Card.Header>
-        <Text h3>Network actors scaling</Text>
-      </Card.Header>
-      <Card.Body>
+      <CardHeader>
+        <h3>Network actors scaling</h3>
+      </CardHeader>
+      <CardBody>
         <form onSubmit={handleSubmit}>
-          <Grid.Container gap={2}>
-            <Grid>
-              <Input
-                type="number"
-                name="validators"
-                label="Validators"
-                value={state.validators}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid>
-              <Input
-                type="number"
-                name="servicers"
-                label="Servicers"
-                value={state.servicers}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid>
-              <Input
-                type="number"
-                name="fishermen"
-                label="Fishermen"
-                value={state.fishermen}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid>
-              <Input
-                type="number"
-                name="full_nodes"
-                label="Full nodes"
-                value={state.full_nodes}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid>
-              <Button type="submit" css={{ mt: '$11' }}>
-                Apply
-              </Button>
-            </Grid>
-          </Grid.Container>
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4 p-1">
+            <Input
+              labelPlacement={'outside'}
+              type="number"
+              name="validators"
+              label="Validators"
+              value={state.validators}
+              onChange={handleChange}
+            />
+            <Input
+              labelPlacement={'outside'}
+              type="number"
+              name="servicers"
+              label="Servicers"
+              value={state.servicers}
+              onChange={handleChange}
+            />
+            <Input
+              labelPlacement={'outside'}
+              type="number"
+              name="fishermen"
+              label="Fishermen"
+              value={state.fishermen}
+              onChange={handleChange}
+            />
+            <Input
+              labelPlacement={'outside'}
+              type="number"
+              name="full_nodes"
+              label="Full nodes"
+              value={state.full_nodes}
+              onChange={handleChange}
+            />
+            <Button type="submit">Apply</Button>
+          </div>
         </form>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

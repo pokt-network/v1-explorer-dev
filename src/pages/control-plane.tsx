@@ -1,6 +1,6 @@
 import { trpc } from '../utils/trpc';
 import { NextPageWithLayout } from './_app';
-import { Grid, Card, Button, Text } from '@nextui-org/react';
+import { Card, Button, CardBody, CardHeader } from '@nextui-org/react';
 
 import { allowedCommands } from '../utils/publicRuntimeConfig';
 import { useState } from 'react';
@@ -51,69 +51,58 @@ const ChainControlPage: NextPageWithLayout = () => {
 
   const buttons = allowedCommands.map((commandName) => {
     return (
-      <Grid key={commandName}>
-        <Button
-          onClick={async () => {
-            const response = await executeCommand.mutateAsync({ commandName });
-          }}
-          size="sm"
-          disabled={executeCommand.isLoading}
-          ghost
-        >
-          {commandName}
-        </Button>
-      </Grid>
+      <Button
+        key={commandName}
+        onPress={async () => {
+          const response = await executeCommand.mutateAsync({ commandName });
+        }}
+        size="sm"
+        disabled={executeCommand.isLoading}
+      >
+        {commandName}
+      </Button>
     );
   });
 
   return (
     <>
-      <Grid.Container gap={2}>
-        <Grid css={{ width: '100%' }}>
-          <NetworkScaleCard />
-        </Grid>
-        <Grid css={{ width: '100%' }}>
-          <Card>
-            <Card.Header>
-              <Text h3>Network commands</Text>
-            </Card.Header>
-            <Card.Body>
-              <Text b css={{ my: '10px' }}>
-                This functionality might not work on some networks, please use
-                the `p1` CLI client instead if experiencing errors below.
-              </Text>
-              {/* <Button.Group
-                  // color="gradient"
-                  ghost
-                  auto
-                  size="sm"
-                  disabled={executeCommand.isLoading}
-                > */}
+      <div className={'w-full'}>
+        <NetworkScaleCard />
+      </div>
+      <div className={'w-full mt-5'}>
+        <Card>
+          <CardHeader>
+            <h3>Network commands</h3>
+          </CardHeader>
+          <CardBody>
+            <p className={'mb-5'}>
+              This functionality might not work on some networks, please use the
+              `p1` CLI client instead if experiencing errors below.
+            </p>
 
-              {/* </Button.Group> */}
-              <Grid.Container gap={2}>{buttons}</Grid.Container>
+            {/* </Button.Group> */}
+            <div className="flex flex-wrap gap-4 items-center">{buttons}</div>
 
-              <Grid.Container gap={2} justify="center">
-                {commandHistory.map((item, index) => (
-                  <Grid xs={12} key={index}>
-                    <Card key={index}>
-                      <Card.Header>
-                        {item.status === 'success' ? '✅' : '❌'} {item.command}{' '}
-                        {dayjs(item.timestamp).fromNow()}
-                      </Card.Header>
-                      <Card.Body>
-                        <Text>{item.error}</Text>
-                        <Text>{item.stdout}</Text>
-                        <Text>{item.stderr}</Text>
-                      </Card.Body>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid.Container>
-            </Card.Body>
-          </Card>
-        </Grid>
-      </Grid.Container>
+            <div className={'mt-3'}>
+              {commandHistory.map((item, index) => (
+                <div key={index}>
+                  <Card key={index}>
+                    <CardHeader>
+                      {item.status === 'success' ? '✅' : '❌'} {item.command}{' '}
+                      {dayjs(item.timestamp).fromNow()}
+                    </CardHeader>
+                    <CardBody>
+                      <p>{item.error}</p>
+                      <p>{item.stdout}</p>
+                      <p>{item.stderr}</p>
+                    </CardBody>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </CardBody>
+        </Card>
+      </div>
     </>
   );
 };

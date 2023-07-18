@@ -4,7 +4,14 @@ import NextLink from 'next/link';
 import { ReactElement, ReactNode, useEffect } from 'react';
 import { DefaultLayout } from '~/components/DefaultLayout';
 import { trpc } from '~/utils/trpc';
-import { Container, Navbar, NextUIProvider, Text } from '@nextui-org/react';
+import {
+  Link,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NextUIProvider,
+} from '@nextui-org/react';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -17,6 +24,9 @@ import {
   addBlock,
 } from '~/utils/appState';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+
+import '../styles/globals.css';
+
 dayjs.extend(relativeTime);
 dayjs.extend(customParseFormat);
 
@@ -70,43 +80,45 @@ const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
   }, [height, latestBlockQuery, lBlockHeight, addLatestBlock]);
 
   const errorMessage = heightQuery.error ? (
-    <Text>error: {JSON.stringify(heightQuery.error)}</Text>
+    <p>error: {JSON.stringify(heightQuery.error)}</p>
   ) : null;
 
   if (heightQueryDataPresent) {
     return getLayout(
       <NextUIProvider>
         <>
-          <Navbar isBordered variant="floating">
-            <Navbar.Brand>
-              <Text b color="inherit">
-                {networkNameQuery.data?.networkName}
-              </Text>
-            </Navbar.Brand>
-            <Navbar.Content variant="highlight-rounded">
-              <Navbar.Link href="/" as={NextLink}>
-                Dashboard
-              </Navbar.Link>
-              <Navbar.Link href="/control-plane" as={NextLink}>
-                Control plane
-              </Navbar.Link>
-            </Navbar.Content>
-            <Navbar.Content>Height: {height.toString()}</Navbar.Content>
+          <Navbar isBordered>
+            <NavbarBrand>
+              <p color="inherit">{networkNameQuery.data?.networkName}</p>
+            </NavbarBrand>
+            <NavbarContent justify="center">
+              <NavbarItem>
+                <Link href="/" as={NextLink}>
+                  Dashboard
+                </Link>
+              </NavbarItem>
+              <NavbarItem>
+                <Link href="/control-plane" as={NextLink}>
+                  Control plane
+                </Link>
+              </NavbarItem>
+            </NavbarContent>
+            <NavbarContent justify={'end'}>
+              Height: {height.toString()}
+            </NavbarContent>
           </Navbar>
 
-          <Container lg>
+          <div className={'container mx-auto mt-5'}>
             <Component />
-          </Container>
+          </div>
         </>
       </NextUIProvider>,
     );
   } else {
     return getLayout(
       <NextUIProvider>
-        <Text>Waiting for latest height.</Text>
-        <Text>
-          Make sure the Pocket PRC port is reachable, and check the logs.
-        </Text>
+        <p>Waiting for latest height.</p>
+        <p>Make sure the Pocket PRC port is reachable, and check the logs.</p>
         {errorMessage}
       </NextUIProvider>,
     );

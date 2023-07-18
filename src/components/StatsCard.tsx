@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { ReactNode } from 'react';
-import { Card, Text, CardProps } from '@nextui-org/react';
+import { Card, CardProps, CardBody } from '@nextui-org/react';
 
 type StatsCardProps = {
   title: ReactNode;
@@ -10,12 +10,16 @@ type StatsCardProps = {
 export const StatsCard = ({ title, value, ...cardProps }: StatsCardProps) => {
   return (
     <Card {...cardProps}>
-      <Card.Body>
-        <Text size="$md">{title}</Text>
-        <Text size="$lg" b>
-          {value.toString()}
-        </Text>
-      </Card.Body>
+      <CardBody>
+        <h5
+          className={
+            'text-medium text-small font-semibold leading-none text-default-600'
+          }
+        >
+          {title}
+        </h5>
+        <h4 className={'text-large'}>{value.toString()}</h4>
+      </CardBody>
     </Card>
   );
 };

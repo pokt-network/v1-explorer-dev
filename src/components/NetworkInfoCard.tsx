@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { ReactNode } from 'react';
-import { Card, Text, CardProps, Link } from '@nextui-org/react';
+import { Card, CardBody, CardHeader, CardProps, Link } from '@nextui-org/react';
 import { trpc } from '~/utils/trpc';
 
 type NetworkInfoCardProps = Partial<CardProps>;
@@ -30,21 +30,21 @@ export const NetworkInfoCard = ({ ...cardProps }: NetworkInfoCardProps) => {
   // const linksNode =
   return (
     <Card {...cardProps}>
-      <Card.Header>
-        <Text b>Network info</Text>
-      </Card.Header>
-      <Card.Body>
-        <Text>
+      <CardHeader>
+        <h3>Network info</h3>
+      </CardHeader>
+      <CardBody>
+        <p>
           Grafana link: <Link href={links.grafana}>{links.grafana}</Link>
-        </Text>
-        <Text b>Documentation: </Text>
-        <Text></Text>
+        </p>
+        <h3>Documentation: </h3>
+
         {links.documentation.map((link) => (
           <Link href={link} key={link}>
             {link}
           </Link>
         ))}
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

@@ -1,7 +1,6 @@
 import { ValidatorTable } from '~/components/ValidatorTable';
 import { trpc } from '../utils/trpc';
 import { NextPageWithLayout } from './_app';
-import { Grid, Container, Table, Card, Text, Button } from '@nextui-org/react';
 import { StatsCard } from '~/components/StatsCard';
 import { parsePocketBlockDate } from '~/utils/misc';
 import { NetworkInfoCard } from '~/components/NetworkInfoCard';
@@ -30,40 +29,41 @@ const IndexPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <Grid.Container gap={2} justify="center">
-        <Grid xs={4} md={2}>
+      <div className={'columns-6 justify-center'}>
+        <div>
           <StatsCard title="Latest block" value={height} />
-        </Grid>
-        <Grid xs={4} md={2}>
+        </div>
+        <div>
           <StatsCard
             title="Since last block"
             value={latestBlockTs ? latestBlockTs.fromNow() : 'N/A'}
           />
-        </Grid>
-        <Grid xs={4} md={2}>
+        </div>
+        <div>
           <StatsCard title="Relays in last block" value={'N/A'} />
-        </Grid>
-        <Grid xs={4} md={2}>
+        </div>
+        <div>
           <StatsCard title="Rewards in last block" value={'N/A'} />
-        </Grid>
-        <Grid xs={4} md={2}>
-          <StatsCard title="Number of applications" value={applicationCountQuery.data?.total_apps || 'N/A'} />
-        </Grid>
-        <Grid xs={4} md={2}>
+        </div>
+        <div>
+          <StatsCard
+            title="Number of applications"
+            value={applicationCountQuery.data?.total_apps || 'N/A'}
+          />
+        </div>
+        <div>
           <StatsCard
             title="Number of nodes"
             value={valdatorCountQuery.data?.total_validators || 'N/A'}
           />
-        </Grid>
-      </Grid.Container>
-      <Grid.Container gap={2}>
-        <Grid xs={8}>
-          <ValidatorTable height={height} />
-        </Grid>
-        <Grid xs={4}>
-          <NetworkInfoCard />
-        </Grid>
-      </Grid.Container>
+        </div>
+      </div>
+      <div className={' mt-5'}>
+        <NetworkInfoCard />
+      </div>
+      <div className={' mt-5'}>
+        <ValidatorTable height={height} />
+      </div>
     </>
   );
 };

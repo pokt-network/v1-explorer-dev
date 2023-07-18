@@ -5,8 +5,16 @@ import {
   Card,
   CardProps,
   Table,
-  Text,
-  Loading,
+  CardHeader,
+  TableCell,
+  ButtonGroup,
+  CardBody,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  Tab,
+  Tabs,
 } from '@nextui-org/react';
 import { latestBlockHeight } from '~/utils/appState';
 import { useState } from 'react';
@@ -27,6 +35,8 @@ export const ValidatorTable = ({ ...cardProps }) => {
   const [currentActor, setCurrentActor] = useState<ActorTypesEnum>(
     ActorTypesEnum.VALIDATOR,
   );
+
+  const [selected, setSelected] = useState('validator');
 
   const isReadyToCall = !(latestBHeight === undefined);
 
@@ -110,70 +120,74 @@ export const ValidatorTable = ({ ...cardProps }) => {
   ];
 
   if (!isReadyToCall) {
-    return <Loading>Waiting for block information..</Loading>;
+    return <p>Waiting for block information..</p>;
   }
 
+  const content = (
+    <>
+      <Card>
+        <CardBody>
+          {isLoading ? (
+            <p>Waiting for a response from RPC node</p>
+          ) : (
+            <Table
+              removeWrapper
+              aria-label="Validator list"
+              // css={{
+              //   height: 'auto',
+              //   minWidth: '100%',
+              // }}
+              // shadow={false}
+            >
+              <TableHeader columns={columns}>
+                {(column) => (
+                  <TableColumn key={column.key}>{column.label}</TableColumn>
+                )}
+              </TableHeader>
+              <TableBody items={actors}>
+                {(item) => (
+                  <TableRow key={item.address}>
+                    <TableCell>{item.address}</TableCell>
+                    <TableCell>{item.staked_amount}</TableCell>
+                    <TableCell>{item.service_url}</TableCell>
+                    <TableCell>{item.paused_height}</TableCell>
+                    <TableCell>{item.chains}</TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          )}
+        </CardBody>
+      </Card>
+    </>
+  );
+
   return (
-    <Card {...cardProps}>
-      <Card.Header>
-        <Button.Group size="sm">
-          <Button
-            onPress={() => setCurrentActor(ActorTypesEnum.VALIDATOR)}
-            ghost={currentActor != ActorTypesEnum.VALIDATOR}
-          >
-            Validators
-          </Button>
-          <Button
-            onPress={() => setCurrentActor(ActorTypesEnum.SERVICER)}
-            ghost={currentActor != ActorTypesEnum.SERVICER}
-          >
-            Servicers
-          </Button>
-          <Button
-            onPress={() => setCurrentActor(ActorTypesEnum.FISHERMAN)}
-            ghost={currentActor != ActorTypesEnum.FISHERMAN}
-          >
-            Fishermen
-          </Button>
-          <Button
-            onPress={() => setCurrentActor(ActorTypesEnum.APPLICATION)}
-            ghost={currentActor != ActorTypesEnum.APPLICATION}
-          >
-            Applications
-          </Button>
-        </Button.Group>
-      </Card.Header>
-      <Card.Body>
-        {isLoading ? (
-          <Loading>Waiting for a response from RPC node</Loading>
-        ) : (
-          <Table
-            aria-label="Validator list"
-            css={{
-              height: 'auto',
-              minWidth: '100%',
-            }}
-            shadow={false}
-          >
-            <Table.Header columns={columns}>
-              {(column) => (
-                <Table.Column key={column.key}>{column.label}</Table.Column>
-              )}
-            </Table.Header>
-            <Table.Body items={actors}>
-              {(item) => (
-                <Table.Row key={item.address}>
-                  <Table.Cell>{item.address}</Table.Cell>
-                  <Table.Cell>{item.staked_amount}</Table.Cell>
-                  <Table.Cell>{item.service_url}</Table.Cell>
-                  <Table.Cell>{item.paused_height}</Table.Cell>
-                  <Table.Cell>{item.chains}</Table.Cell>
-                </Table.Row>
-              )}
-            </Table.Body>
-          </Table>
-        )}
-      </Card.Body>
-    </Card>
+    <>
+      <div className="flex w-full flex-col">
+        <Tabs
+          aria-label="Actors"
+          selectedKey={currentActor}
+          onSelectionChange={(actor: any) => setCurrentActor(actor)}
+          disabledKeys={['portal']}
+        >
+          <Tab key={ActorTypesEnum.VALIDATOR} title="Validators">
+            {content}
+          </Tab>
+          <Tab key={ActorTypesEnum.SERVICER} title="Servicers">
+            {content}
+          </Tab>
+          <Tab key={ActorTypesEnum.FISHERMAN} title="Fishermen">
+            {content}
+          </Tab>
+          <Tab key={ActorTypesEnum.APPLICATION} title="Applications">
+            {content}
+          </Tab>
+          <Tab key={'portal'} title="Portals">
+            {content}
+          </Tab>
+        </Tabs>
+      </div>
+    </>
   );
 };
