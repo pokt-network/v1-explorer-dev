@@ -47,7 +47,12 @@ type AppPropsWithLayout = AppProps & {
 
 const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout =
-    Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
+    Component.getLayout ??
+    ((page) => (
+      <NextUIProvider>
+        <DefaultLayout>{page}</DefaultLayout>
+      </NextUIProvider>
+    ));
 
   const networkNameQuery = trpc.settings.useQuery();
   const heightQuery = trpc.rpc.height.useQuery(undefined, {
@@ -85,42 +90,40 @@ const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
 
   if (heightQueryDataPresent) {
     return getLayout(
-      <NextUIProvider>
-        <>
-          <Navbar isBordered>
-            <NavbarBrand>
-              <p color="inherit">{networkNameQuery.data?.networkName}</p>
-            </NavbarBrand>
-            <NavbarContent justify="center">
-              <NavbarItem>
-                <Link href="/" as={NextLink}>
-                  Dashboard
-                </Link>
-              </NavbarItem>
-              <NavbarItem>
-                <Link href="/control-plane" as={NextLink}>
-                  Control plane
-                </Link>
-              </NavbarItem>
-            </NavbarContent>
-            <NavbarContent justify={'end'}>
-              Height: {height.toString()}
-            </NavbarContent>
-          </Navbar>
+      <>
+        <Navbar isBordered>
+          <NavbarBrand>
+            <p color="inherit">{networkNameQuery.data?.networkName}</p>
+          </NavbarBrand>
+          <NavbarContent justify="center">
+            <NavbarItem>
+              <Link href="/" as={NextLink}>
+                Dashboard
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Link href="/control-plane" as={NextLink}>
+                Control plane
+              </Link>
+            </NavbarItem>
+          </NavbarContent>
+          <NavbarContent justify={'end'}>
+            Height: {height.toString()}
+          </NavbarContent>
+        </Navbar>
 
-          <div className={'container mx-auto mt-5'}>
-            <Component />
-          </div>
-        </>
-      </NextUIProvider>,
+        <div className={'container mx-auto mt-5'}>
+          <Component />
+        </div>
+      </>,
     );
   } else {
     return getLayout(
-      <NextUIProvider>
+      <>
         <p>Waiting for latest height.</p>
         <p>Make sure the Pocket PRC port is reachable, and check the logs.</p>
         {errorMessage}
-      </NextUIProvider>,
+      </>,
     );
   }
 }) as AppType;
