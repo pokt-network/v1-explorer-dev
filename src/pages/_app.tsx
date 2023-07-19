@@ -17,6 +17,7 @@ import {
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import '../styles/globals.css';
+
 import {
   Navbar,
   NavbarBrand,

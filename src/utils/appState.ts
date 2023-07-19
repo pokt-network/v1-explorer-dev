@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { Block, ProtocolActor, QueryBlockResponse } from './v1-rpc-client';
+import { Block, QueryBlockResponse } from './v1-rpc-client';
 
 const BLOCKS_TO_PRESERVE = 3;
 

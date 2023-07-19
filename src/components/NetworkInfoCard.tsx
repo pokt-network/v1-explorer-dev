@@ -1,5 +1,3 @@
-import Head from 'next/head';
-import { ReactNode } from 'react';
 import { trpc } from '~/utils/trpc';
 import { Card, CardBody, CardHeader, CardProps } from '@nextui-org/react';
 import { Link } from '@nextui-org/react';

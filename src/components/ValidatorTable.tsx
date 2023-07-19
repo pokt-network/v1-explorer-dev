@@ -1,4 +1,4 @@
-import { atom, useAtom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { trpc } from '../utils/trpc';
 
 import {
@@ -30,8 +30,6 @@ export const ValidatorTable = ({ ...cardProps }) => {
   const [currentActor, setCurrentActor] = useState<ActorTypesEnum>(
     ActorTypesEnum.VALIDATOR,
   );
-
-  const [selected, setSelected] = useState('validator');
 
   const isReadyToCall = !(latestBHeight === undefined);
 

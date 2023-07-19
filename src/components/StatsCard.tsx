@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { ReactNode } from 'react';
 import { Card, CardBody, CardProps } from '@nextui-org/react';
 

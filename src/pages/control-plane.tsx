@@ -21,7 +21,7 @@ type CommandHistoryItem = {
 const ChainControlPage: NextPageWithLayout = () => {
   const heightQuery = trpc.rpc.height.useQuery();
   const executeCommand = trpc.chainCommands.executeCommand.useMutation({
-    onSuccess(data, variables, context) {
+    onSuccess(data, variables) {
       heightQuery.refetch();
       setCommandHistory((prev) => [
         {
@@ -34,7 +34,7 @@ const ChainControlPage: NextPageWithLayout = () => {
         ...prev,
       ]);
     },
-    onError(error, variables, context) {
+    onError(error, variables) {
       setCommandHistory((prev) => [
         {
           command: variables.commandName,
@@ -56,7 +56,7 @@ const ChainControlPage: NextPageWithLayout = () => {
       <Button
         key={commandName}
         onPress={async () => {
-          const response = await executeCommand.mutateAsync({ commandName });
+          await executeCommand.mutateAsync({ commandName });
         }}
         size="sm"
         disabled={executeCommand.isLoading}

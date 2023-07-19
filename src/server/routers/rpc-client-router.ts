@@ -1,11 +1,6 @@
 import { router, publicProcedure } from '../trpc';
-import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import {
-  v1RPC,
-  QueryValidatorsResponse,
-  ActorTypesEnum,
-} from '~/utils/v1-rpc-client';
+import { v1RPC } from '~/utils/v1-rpc-client';
 import { env } from '../env';
 
 const client = new v1RPC({
