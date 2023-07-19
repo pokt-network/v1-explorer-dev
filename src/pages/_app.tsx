@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import type { AppType, AppProps } from 'next/app';
 import NextLink from 'next/link';
 import { ReactElement, ReactNode, useEffect } from 'react';
-import { DefaultLayout } from '~/components/DefaultLayout';
 import { trpc } from '~/utils/trpc';
 import { NextUIProvider } from '@nextui-org/react';
 
@@ -11,7 +10,6 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import {
   ExtendedQueryBlockResponse,
-  latestBlock,
   latestHeight,
   latestBlockHeight,
   addBlock,
@@ -45,14 +43,14 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
-  const getLayout =
-    Component.getLayout ??
-    ((page) => (
-      <NextUIProvider>
-        <DefaultLayout>{page}</DefaultLayout>
-      </NextUIProvider>
-    ));
+const MyApp = (({ Component }: AppPropsWithLayout) => {
+  // const getLayout =
+  //   Component.getLayout ??
+  //   ((page) => (
+  //     <NextUIProvider>
+  //       <DefaultLayout>{page}</DefaultLayout>
+  //     </NextUIProvider>
+  //   ));
 
   const networkNameQuery = trpc.settings.useQuery();
   const heightQuery = trpc.rpc.height.useQuery(undefined, {
@@ -89,41 +87,51 @@ const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
   ) : null;
 
   if (heightQueryDataPresent) {
-    return getLayout(
-      <>
-        <Navbar isBordered>
-          <NavbarBrand>
-            <p color="inherit">{networkNameQuery.data?.networkName}</p>
-          </NavbarBrand>
-          <NavbarContent justify="center">
-            <NavbarItem>
-              <Link href="/" as={NextLink}>
-                Dashboard
-              </Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Link href="/control-plane" as={NextLink}>
-                Control plane
-              </Link>
-            </NavbarItem>
-          </NavbarContent>
-          <NavbarContent justify={'end'}>
-            Height: {height.toString()}
-          </NavbarContent>
-        </Navbar>
+    return (
+      <html lang="en" className="dark">
+        <body>
+          <NextUIProvider>
+            <Navbar isBordered>
+              <NavbarBrand>
+                <p color="inherit">{networkNameQuery.data?.networkName}</p>
+              </NavbarBrand>
+              <NavbarContent justify="center">
+                <NavbarItem>
+                  <Link href="/" as={NextLink}>
+                    Dashboard
+                  </Link>
+                </NavbarItem>
+                <NavbarItem>
+                  <Link href="/control-plane" as={NextLink}>
+                    Control plane
+                  </Link>
+                </NavbarItem>
+              </NavbarContent>
+              <NavbarContent justify={'end'}>
+                Height: {height.toString()}
+              </NavbarContent>
+            </Navbar>
 
-        <div className={'container mx-auto mt-5'}>
-          <Component />
-        </div>
-      </>,
+            <div className={'container mx-auto mt-5'}>
+              <Component />
+            </div>
+          </NextUIProvider>
+        </body>
+      </html>
     );
   } else {
-    return getLayout(
-      <>
-        <p>Waiting for latest height.</p>
-        <p>Make sure the Pocket PRC port is reachable, and check the logs.</p>
-        {errorMessage}
-      </>,
+    return (
+      <html lang="en" className="dark">
+        <body>
+          <NextUIProvider>
+            <p>Waiting for latest height.</p>
+            <p>
+              Make sure the Pocket PRC port is reachable, and check the logs.
+            </p>
+            {errorMessage}
+          </NextUIProvider>
+        </body>
+      </html>
     );
   }
 }) as AppType;
