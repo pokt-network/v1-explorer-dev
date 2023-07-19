@@ -59,10 +59,10 @@ const IndexPage: NextPageWithLayout = () => {
           />
         </div>
       </div>
-      <div className={' mt-5'}>
+      <div className={'mt-5'}>
         <NetworkInfoCard />
       </div>
-      <div className={' mt-5'}>
+      <div className={'mt-5'}>
         <ValidatorTable />
       </div>
     </>

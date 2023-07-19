@@ -4,9 +4,10 @@
 import { publicProcedure, router } from '../trpc';
 import { chainCommandsRouter } from './chain-commands';
 import { rpcClientRouter } from './rpc-client-router';
+import { infrastructureHealthchecksRouter } from './infrastructure-healthchecks';
 
 export const appRouter = router({
-  healthcheck: publicProcedure.query(() => 'yay!'),
+  infrastructureHealthchecks: infrastructureHealthchecksRouter,
   settings: publicProcedure.query(() => {
     return { networkName: process.env.NETWORK_NAME };
   }),

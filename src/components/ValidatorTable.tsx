@@ -10,10 +10,11 @@ import {
   TableCell,
 } from '@nextui-org/react';
 import { latestBlockHeight } from '~/utils/appState';
-import { useState } from 'react';
-import { ActorTypesEnum } from '~/utils/v1-rpc-client';
+import { Suspense, useState } from 'react';
+import { ActorTypesEnum, ProtocolActor } from '~/utils/v1-rpc-client';
 import { Card, CardBody } from '@nextui-org/react';
 import { Tab, Tabs } from '@nextui-org/react';
+import { ActorHeight } from '~/components/ActorHeight';
 
 declare global {
   interface BigInt {
@@ -23,6 +24,13 @@ declare global {
 
 BigInt.prototype.toJSON = function (): string {
   return this.toString();
+};
+
+const actorHeightForActor = (actor: ProtocolActor) => {
+  if (actor.actor_type === ActorTypesEnum.APPLICATION) {
+    return <>N/A</>;
+  }
+  return <ActorHeight serviceUrl={actor.service_url} />;
 };
 
 export const ValidatorTable = () => {
@@ -90,6 +98,7 @@ export const ValidatorTable = () => {
     listApplicationsQuery.isRefetching;
 
   const columns = [
+    { key: 'height', label: 'Height' },
     {
       key: 'address',
       label: 'Address',
@@ -140,6 +149,9 @@ export const ValidatorTable = () => {
               <TableBody items={actors}>
                 {(item) => (
                   <TableRow key={item.address}>
+                    <TableCell>
+                      <Suspense>{actorHeightForActor(item)}</Suspense>
+                    </TableCell>
                     <TableCell>{item.address}</TableCell>
                     <TableCell>{item.staked_amount}</TableCell>
                     <TableCell>{item.service_url}</TableCell>
