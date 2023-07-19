@@ -63,7 +63,7 @@ const IndexPage: NextPageWithLayout = () => {
         <NetworkInfoCard />
       </div>
       <div className={' mt-5'}>
-        <ValidatorTable height={height} />
+        <ValidatorTable />
       </div>
     </>
   );

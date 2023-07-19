@@ -25,7 +25,7 @@ BigInt.prototype.toJSON = function (): string {
   return this.toString();
 };
 
-export const ValidatorTable = ({ ...cardProps }) => {
+export const ValidatorTable = () => {
   const latestBHeight = useAtomValue(latestBlockHeight);
   const [currentActor, setCurrentActor] = useState<ActorTypesEnum>(
     ActorTypesEnum.VALIDATOR,
