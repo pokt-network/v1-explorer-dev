@@ -25,5 +25,5 @@ export const ActorHeight = ({ serviceUrl }: ActorHeightProps) => {
     return <>LOAD</>;
   }
 
-  return <>actorHeightQuery.data?.height</>;
+  return <>{height}</>;
 };
