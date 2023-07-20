@@ -26,6 +26,12 @@ const listFn = (selector: string) =>
 const debugCliPodSelector = env.CLI_CLIENT_POD_SELECTOR;
 const debugCliPodContainerName = 'pocket';
 
+type ExecuteCommandReturnType = {
+  result: number;
+  stdout: string;
+  stderr: string;
+};
+
 export const chainCommandsRouter = router({
   executeCommand: publicProcedure
     .input(
@@ -33,7 +39,7 @@ export const chainCommandsRouter = router({
         commandName: z.string(), // TODO: should be enum checking `allowedCommands`
       }),
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input }): Promise<ExecuteCommandReturnType> => {
       const { commandName } = input;
 
       // Fetching all the pods in the given namespace that match the provided label
@@ -86,7 +92,7 @@ export const chainCommandsRouter = router({
 
           execCmd.on('exit', (code) => {
             console.log(`Exited with status: ${code}`);
-            resolve({ result: code, stdout, stderr });
+            resolve({ result: code || -1, stdout, stderr });
           });
 
           execCmd.on('error', (e) => {
