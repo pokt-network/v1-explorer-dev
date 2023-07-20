@@ -18,7 +18,7 @@ export const NetworkInfoCard = ({ ...cardProps }: NetworkInfoCardProps) => {
       'https://github.com/pokt-network/pocket/blob/main/build/localnet/README.md',
     ];
   } else {
-    links.grafana = 'https://grafana.dev-us-east4-1.poktnodes.network:8443/';
+    links.grafana = `https://grafana.dev-us-east4-1.poktnodes.network:8443/d/U7-TZia4z/v1-network-nodes?orgId=1&refresh=10s&var-network=devnet-${networkName}&var-region=All`;
     links.documentation = [
       'https://github.com/pokt-network/protocol-infra/blob/main/README.md',
       'https://www.notion.so/pocketnetwork/How-to-DevNet-ff1598f27efe44c09f34e2aa0051f0dd?pvs=4',

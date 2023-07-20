@@ -1,7 +1,7 @@
-# Pocket v1 Blockchain Explorer / Dev Assistance App
+# Pocket v1 Developer Dashboard
 
 ## Overview
-This is a utility application designed to aid developers in interacting with both local and development networks of Pocket v1. The app can function as a mini explorer.
+This is a utility application designed to aid developers in interacting with both local and development networks of Pocket v1. The app can function as a mini explorer, though currently it does not persist the historical data.
 
 ## Quick start
 

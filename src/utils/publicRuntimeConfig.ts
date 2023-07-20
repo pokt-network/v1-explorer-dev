@@ -17,11 +17,13 @@ export const publicRuntimeConfig =
   nextConfig.publicRuntimeConfig as PublicRuntimeConfig;
 
 export const allowedCommands = [
-  'BlockRequest',
-  'MetadataRequest',
-  'PrintNodeState',
-  'ResetToGenesis',
-  'ShowLatestBlockInStore',
+  // 'BlockRequest',
+  // 'MetadataRequest',
+  // 'PrintNodeState',
+  // 'ResetToGenesis',
+  // 'ShowLatestBlockInStore',
+  // 'TogglePacemakerMode',
+  // 'TriggerNextView',
+  'TriggerView',
   'TogglePacemakerMode',
-  'TriggerNextView',
 ];
