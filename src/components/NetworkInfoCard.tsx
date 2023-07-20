@@ -34,12 +34,15 @@ export const NetworkInfoCard = ({ ...cardProps }: NetworkInfoCardProps) => {
       </CardHeader>
       <CardBody>
         <p>
-          Grafana link: <Link href={links.grafana}>{links.grafana}</Link>
+          Grafana link:{' '}
+          <Link isExternal={true} href={links.grafana}>
+            {links.grafana}
+          </Link>
         </p>
         <h3>Documentation: </h3>
 
         {links.documentation.map((link) => (
-          <Link href={link} key={link}>
+          <Link isExternal href={link} key={link}>
             {link}
           </Link>
         ))}

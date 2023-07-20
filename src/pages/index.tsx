@@ -48,7 +48,7 @@ const IndexPage: NextPageWithLayout = () => {
         </div>
         <div>
           <StatsCard
-            title="Number of applications"
+            title="Number of apps"
             value={applicationCountQuery.data?.total_apps || 'N/A'}
           />
         </div>

@@ -23,8 +23,8 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  Link,
 } from '@nextui-org/react';
-import { Link } from '@nextui-org/react';
 
 dayjs.extend(relativeTime);
 dayjs.extend(customParseFormat);
@@ -87,7 +87,9 @@ const MyApp = (({ Component }: AppPropsWithLayout) => {
       <>
         <Navbar isBordered>
           <NavbarBrand>
-            <p color="inherit">{networkNameQuery.data?.networkName}</p>
+            <Link href="/" as={NextLink}>
+              <p color="inherit">{networkNameQuery.data?.networkName}</p>
+            </Link>
           </NavbarBrand>
           <NavbarContent justify="center">
             <NavbarItem>
