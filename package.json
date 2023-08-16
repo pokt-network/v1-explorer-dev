@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@kubernetes/client-node": "^0.18.1",
-    "@nextui-org/react": "0.0.0-dev-v2-20230718133109",
+    "@nextui-org/react": "2.0.22",
     "@prisma/client": "^4.14.1",
     "@react-aria/ssr": "^3.7.0",
     "@react-aria/visually-hidden": "^3.8.2",
